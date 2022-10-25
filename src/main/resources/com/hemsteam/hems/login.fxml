@@ -13,12 +13,12 @@
    <center>
       <GridPane BorderPane.alignment="CENTER">
          <children>
-            <TextField maxHeight="1.7976931348623157E308" promptText="请输入用户名">
+            <TextField id="userName" fx:id="userName" maxHeight="1.7976931348623157E308" promptText="请输入用户名">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <PasswordField maxHeight="1.7976931348623157E308" promptText="请输入密码" GridPane.rowIndex="1">
+            <PasswordField id="passWord" fx:id="passWord" maxHeight="1.7976931348623157E308" promptText="请输入密码" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
