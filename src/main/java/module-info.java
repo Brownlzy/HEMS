@@ -9,4 +9,6 @@ module com.hemsteam.hems {
 
     opens com.hemsteam.hems to javafx.fxml;
     exports com.hemsteam.hems;
+    exports com.hemsteam.hems.controllers;
+    opens com.hemsteam.hems.controllers to javafx.fxml;
 }
