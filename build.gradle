@@ -42,6 +42,7 @@ dependencies {
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
     implementation 'org.jetbrains:annotations:20.1.0'
 
+    implementation("org.xerial:sqlite-jdbc:3.39.3.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

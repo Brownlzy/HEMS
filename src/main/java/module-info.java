@@ -8,7 +8,7 @@ module com.hemsteam.hems {
     requires org.kordamp.bootstrapfx.core;
     requires org.jetbrains.annotations;
     requires java.sql;
-    //requires org.xerial.sqlitejdbc;
+    requires org.xerial.sqlitejdbc;
 
 
     opens com.hemsteam.hems to javafx.fxml;
