@@ -9,8 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -22,7 +20,7 @@ public class HEMS extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        stage.setTitle("家庭支出管理系统");
+        stage.setTitle("");
         gotoLogin();
         stage.show();
     }
@@ -34,6 +32,7 @@ public class HEMS extends Application {
         try{
             LoginController login = (LoginController) replaceSceneContent("login.fxml",300,200);
             login.setApp(this);
+            stage.setTitle("登录");
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -49,6 +48,7 @@ public class HEMS extends Application {
         try{
             MainController main = (MainController) replaceSceneContent("main.fxml",1200,800);
             main.setApp(this);
+            stage.setTitle("家庭支出管理系统");
         }
         catch (Exception ex) {
             Log.d(this.getClass(),"主页面跳转异常！");
@@ -59,6 +59,7 @@ public class HEMS extends Application {
         try{
             ResigsterController resigster = (ResigsterController) replaceSceneContent("resigster.fxml",300,200);
             resigster.setApp(this);
+            stage.setTitle("注册");
         }
         catch (Exception ex) {
             ex.printStackTrace();
