@@ -6,6 +6,7 @@ module com.hemsteam.hems {
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires org.jetbrains.annotations;
 
     opens com.hemsteam.hems to javafx.fxml;
     exports com.hemsteam.hems;
