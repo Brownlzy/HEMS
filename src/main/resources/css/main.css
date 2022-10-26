@@ -1,0 +1,55 @@
+.root{-fx-background-image:url("../image/main.jpg");}
+.menu-btn {
+      -fx-background-color: rgb(40, 43, 51);
+      -fx-text-fill: rgb(191, 192, 194);
+}
+.menu-btn:hover {
+   -fx-background-color: rgb(95, 184, 120);
+   -fx-text-fill: #fff;
+}
+
+.gray-theme {
+   -fx-background-color: rgb(210, 210, 210);
+   -fx-text-fill: #fff;
+}
+.default-theme {
+   -fx-background-color: #fff;
+   -fx-border-color: rgb(230, 230, 230);
+   -fx-text-fill: rgb(110, 110, 110);
+}
+.dark-theme {
+   -fx-background-color: rgb(40, 43, 51);
+}
+
+
+.VBox {
+   -fx-margin:0;
+   -fx-border-color: rgb(162, 162, 162);
+   -fx-background-insets: 0;
+   -fx-border-radius: 5px;
+   -fx-background-radius: 5px;
+   -fx-padding: 5 5 5 5;
+}
+/*风琴标题面板背景色*/
+.titled-pane > .title {
+   -fx-background-color: rgb(58, 61, 73);
+   -fx-padding: 30 10 10 10;
+}
+.titled-pane {
+   -fx-text-fill: rgb(174, 175, 180);
+}
+.menu-btn {
+ -fx-pref-width: 300px;
+   -fx-pref-height: 35px;
+   -fx-background-color: rgb(40, 43, 51);
+   -fx-text-fill: rgb(191, 192, 194);
+}
+
+/*左侧导航菜单按钮鼠标悬停效果*/
+.menu-btn:hover {
+   -fx-background-color: rgb(95, 184, 120);
+   -fx-text-fill: #fff;
+}
+
+
+
