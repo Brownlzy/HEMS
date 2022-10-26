@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0"
-            prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.MainController">
     <top>
         <AnchorPane prefHeight="80.0">
             <children>
-                <Label styleClass="font-gray" text="家庭支出管理系统" AnchorPane.leftAnchor="10"
-                       AnchorPane.topAnchor="20">
+                <Label styleClass="font-gray" text="家庭支出管理系统" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
                     <effect>
-                        <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0"/>
+                        <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0" />
                     </effect>
                     <font>
-                        <Font name="System Bold" size="26.0"/>
+                        <Font name="System Bold" size="26.0" />
                     </font>
                 </Label>
                 <ImageView fitHeight="45" fitWidth="45" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="15">
@@ -25,8 +29,7 @@
                         <!--Image url="" /-->
                     </image>
                 </ImageView>
-                <Button styleClass="btn-radius-large,blue-theme" text="退出系统" AnchorPane.rightAnchor="20"
-                        AnchorPane.topAnchor="20"/>
+                <Button fx:id="exit" onAction="#onExitButtonClick" styleClass="btn-radius-large,blue-theme" text="退出系统" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
             </children>
         </AnchorPane>
     </top>
@@ -41,8 +44,8 @@
                                     <content>
                                         <VBox minHeight="100" spacing="10" styleClass="dark-theme">
                                             <children>
-                                                <Button styleClass="menu-btn" text="图书类别"/>
-                                                <Button styleClass="menu-btn" text="分类统计"/>
+                                                <Button styleClass="menu-btn" text="图书类别" />
+                                                <Button styleClass="menu-btn" text="分类统计" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -51,8 +54,8 @@
                                     <content>
                                         <VBox minHeight="100" spacing="10" styleClass="dark-theme">
                                             <children>
-                                                <Button styleClass="menu-btn" text="图书信息"/>
-                                                <Button styleClass="menu-btn" text="统计分析"/>
+                                                <Button styleClass="menu-btn" text="图书信息" />
+                                                <Button styleClass="menu-btn" text="统计分析" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -61,9 +64,9 @@
                                     <content>
                                         <VBox minHeight="130" spacing="10" styleClass="dark-theme">
                                             <children>
-                                                <Button styleClass="menu-btn" text="管理员信息"/>
-                                                <Button styleClass="menu-btn" text="读者信息"/>
-                                                <Button styleClass="menu-btn" text="统计分析"/>
+                                                <Button styleClass="menu-btn" text="管理员信息" />
+                                                <Button styleClass="menu-btn" text="读者信息" />
+                                                <Button styleClass="menu-btn" text="统计分析" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -72,8 +75,8 @@
                                     <content>
                                         <VBox minHeight="130" spacing="10" styleClass="dark-theme">
                                             <children>
-                                                <Button styleClass="menu-btn" text="借阅查询"/>
-                                                <Button styleClass="menu-btn" text="统计分析"/>
+                                                <Button styleClass="menu-btn" text="借阅查询" />
+                                                <Button styleClass="menu-btn" text="统计分析" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -82,9 +85,9 @@
                                     <content>
                                         <VBox minHeight="130" spacing="10" styleClass="dark-theme">
                                             <children>
-                                                <Button styleClass="menu-btn" text="系统初始化"/>
-                                                <Button styleClass="menu-btn" text="数据备份"/>
-                                                <Button styleClass="menu-btn" text="主题设置"/>
+                                                <Button styleClass="menu-btn" text="系统初始化" />
+                                                <Button styleClass="menu-btn" text="数据备份" />
+                                                <Button styleClass="menu-btn" text="主题设置" />
                                             </children>
                                         </VBox>
                                     </content>
@@ -95,15 +98,14 @@
                 </AnchorPane>
 
                 <!--中间内容面板-->
-                <StackPane fx:id="mainContainer" minWidth="779.0" prefHeight="588.0" prefWidth="890.0"
-                           styleClass="default-theme">
+                <StackPane fx:id="mainContainer" minWidth="779.0" prefHeight="588.0" prefWidth="890.0" styleClass="default-theme">
                     <padding>
-                        <Insets bottom="5" left="30" right="10" top="10"/>
+                        <Insets bottom="5" left="30" right="10" top="10" />
                     </padding>
                 </StackPane>
             </items>
             <padding>
-                <Insets top="10"/>
+                <Insets top="10" />
             </padding>
         </SplitPane>
     </center>

@@ -65,6 +65,7 @@ public class HEMS extends Application {
             Scene scene = new Scene(page,width,height);
             stage.setScene(scene);
             stage.sizeToScene();
+            stage.centerOnScreen();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(this.getClass(),"页面加载异常！");
