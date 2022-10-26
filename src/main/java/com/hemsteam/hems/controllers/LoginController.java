@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +35,13 @@ public class LoginController implements Initializable {
         userName.clear();
         passWord.clear();
     }
+
+    @FXML
+    protected void onResigsterClick(){
+        Log.d(this.getClass(),"注册按钮被点击");
+        hems.gotoResigster();
+    }
+
 
     public void setApp(HEMS hems) {
         this.hems = hems;
