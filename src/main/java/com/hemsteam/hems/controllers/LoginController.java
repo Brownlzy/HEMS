@@ -36,6 +36,13 @@ public class LoginController implements Initializable {
         passWord.clear();
     }
 
+    @FXML
+    protected void onResigsterClick(){
+        Log.d(this.getClass(),"注册按钮被点击");
+        hems.gotoResigster();
+    }
+
+
     public void setApp(HEMS hems) {
         this.hems = hems;
     }

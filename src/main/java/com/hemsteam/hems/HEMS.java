@@ -2,6 +2,7 @@ package com.hemsteam.hems;
 
 import com.hemsteam.hems.controllers.LoginController;
 import com.hemsteam.hems.controllers.MainController;
+import com.hemsteam.hems.controllers.ResigsterController;
 import com.hemsteam.hems.utils.Log;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,7 @@ public class HEMS extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        stage.setTitle("登录界面");
+        stage.setTitle("家庭支出管理系统");
         gotoLogin();
         stage.show();
     }
@@ -31,7 +32,7 @@ public class HEMS extends Application {
      */
     public void gotoLogin(){
         try{
-            LoginController login = (LoginController) replaceSceneContent("login.fxml",300,150);
+            LoginController login = (LoginController) replaceSceneContent("login.fxml",300,200);
             login.setApp(this);
         }
         catch (Exception ex) {
@@ -54,6 +55,16 @@ public class HEMS extends Application {
         }
     }
 
+    public void gotoResigster(){
+        try{
+            ResigsterController resigster = (ResigsterController) replaceSceneContent("resigster.fxml",300,200);
+            resigster.setApp(this);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            Log.d(this.getClass(),"注册页面跳转异常！");
+        }
+    }
     private Initializable replaceSceneContent(String fxml,int width,int height) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();
