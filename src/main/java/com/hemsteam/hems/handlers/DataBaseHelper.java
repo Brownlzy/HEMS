@@ -10,7 +10,7 @@ public class DataBaseHelper {
     //类路径
     public static String Class_Name = "org.sqlite.JDBC";
     //数据库路径
-    public static String DB_URL = "jdbc:sqlite:D:\\IDEA\\IDEA Project\\HEMS\\DataBase\\HEMS.sqlite";
+    public static String DB_URL = "jdbc:sqlite:HEMS.sqlite";
     //连接变量
     private static Connection conn;
     //创建声明
