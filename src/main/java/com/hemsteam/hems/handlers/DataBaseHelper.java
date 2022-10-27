@@ -1,5 +1,6 @@
 package com.hemsteam.hems.handlers;
 
+import com.hemsteam.hems.utils.Log;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
@@ -13,12 +14,40 @@ public class DataBaseHelper {
     //连接变量
     private static Connection conn;
     //创建声明
-    Statement stmt;
+    static Statement stmt;
 
     private static DataBaseHelper dataBaseHelper;
 
-    private DataBaseHelper() {
+    private DataBaseHelper(){
         //TODO: init
+        //创建数据库
+        CreateDB();
+        //创建ID表
+        try {
+            CreateTable_ID();
+            Log.i(this.getClass(),"Build Success");
+        } catch (SQLException e) {
+            Log.e(this.getClass(),"CREATE ID ERROR");
+            throw new RuntimeException();
+        }
+
+        //创建Data表
+        try {
+            CreateTable_Data();
+            Log.i(this.getClass(),"Build Success");
+        } catch (SQLException e) {
+            Log.e(this.getClass(),"CREATE Data ERROR");
+            throw new RuntimeException();
+        }
+
+        //插入初始账户
+        try {
+            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+        } catch (SQLException e) {
+
+        }
+
+
     }
 
     public static DataBaseHelper getInstance() {
@@ -181,7 +210,7 @@ public class DataBaseHelper {
     }
 
     /**
-     * 打印Data表的内容
+     * 查找Data表的内容
      * @param condition
      * @throws SQLException
      */
@@ -203,7 +232,7 @@ public class DataBaseHelper {
     }
 
     /**
-     * 打印满足conditon条件的ID表的内容
+     * 查找满足conditon条件的ID表的内容
      * @param condition
      * @throws SQLException
      */
