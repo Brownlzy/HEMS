@@ -1,5 +1,6 @@
 package com.hemsteam.hems;
 
+
 import com.hemsteam.hems.controllers.LoginController;
 import com.hemsteam.hems.controllers.MainController;
 import com.hemsteam.hems.controllers.ResigsterController;
@@ -18,6 +19,8 @@ import java.sql.*;
 
 public class HEMS extends Application {
     private Stage stage;
+
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -87,7 +90,16 @@ public class HEMS extends Application {
         return (Initializable) loader.getController();
     }
 
-    public static void main(String[] args) {
+
+
+
+
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+
         launch();
+
+
     }
 }
