@@ -58,19 +58,33 @@ public class DataBaseHelper {
 
     @Nullable
     public String getPasswordHashByUsername(String userName) {
-        if (/*用户不存在*/false) {
+//        if (/*用户不存在*/false) {
+//            return null;
+//        } else {
+//            return new String("44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");//用户密码的哈希
+//        }
+
+        try {
+            Log.d(this.getClass(),userName);
+            Log.d(this.getClass(),ID_Query("ID='"+userName+"'"));
+            return ID_Query("ID='"+userName+"'");
+        } catch (SQLException e) {
             return null;
-        } else {
-            return new String("44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");//用户密码的哈希
         }
     }
 
     public boolean resigsterNewUser(String username, String passwordHash) {
-        if (/*用户存在*/false) {
-            return false;
-        } else {
-            //保存新用户
+//        if (/*用户存在*/false) {
+//            return false;
+//        } else {
+//            //保存新用户
+//            return true;
+//        }
+        try {
+            ID_Insert(username,passwordHash);
             return true;
+        } catch (SQLException e) {
+            return false;
         }
     }
 
@@ -214,7 +228,7 @@ public class DataBaseHelper {
      * @param condition
      * @throws SQLException
      */
-    public static void query(String condition) throws SQLException {
+    public static void Data_Query(String condition) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM Data WHERE " + condition;
             Statement stmt = conn.createStatement();
@@ -236,17 +250,17 @@ public class DataBaseHelper {
      * @param condition
      * @throws SQLException
      */
-    public static void Data_Query(String condition) throws SQLException {
+    public static String ID_Query(String condition) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM ID WHERE " + condition;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                System.out.print("id：" + rs.getString(1) + " ");
-                System.out.print("password：" + rs.getString(2) + " ");
+//                System.out.print("id：" + rs.getString(1) + " ");
+//                System.out.print("password：" + rs.getString(2) + " ");
+                    return rs.getString(2);
             }
         }
+        return null;
     }
-
-
 }
