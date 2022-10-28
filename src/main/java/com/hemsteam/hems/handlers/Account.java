@@ -1,7 +1,6 @@
 package com.hemsteam.hems.handlers;
 
 import com.hemsteam.hems.utils.SHA256;
-import com.hemsteam.hems.handlers.DataBaseHelper;
 
 public class Account {
     public static final int RESIGSTER_SUCCESSFUL = 0;
@@ -29,6 +28,7 @@ public class Account {
     }
 
     public static String getUser() {
+        if (account == null) account = new Account();
         return user;
     }
 
