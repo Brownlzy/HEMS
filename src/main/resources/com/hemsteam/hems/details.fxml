@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+<SplitPane dividerPositions="0.135678391959799" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../css/details.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="87.0" prefWidth="598.0">
+         <children>
+            <Label id="Label" alignment="CENTER" layoutX="-2.0" layoutY="-4.0" prefHeight="61.0" prefWidth="600.0" text="明细">
+               <font>
+                  <Font size="42.0" />
+               </font></Label>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="576.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="600.0">
+               <children>
+                  <TableView prefHeight="221.0" prefWidth="600.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="日期" />
+                      <TableColumn prefWidth="75.0" text="金额" />
+                        <TableColumn prefWidth="75.0" text="地点" />
+                        <TableColumn prefWidth="109.0" text="原因" />
+                        <TableColumn minWidth="0.0" prefWidth="115.0" text="备注" />
+                        <TableColumn minWidth="0.0" prefWidth="237.0" text="选择">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="编辑" />
+                              <TableColumn prefWidth="75.0" text="删除" />
+                           </columns></TableColumn>
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <TextField layoutX="6.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="日期" />
+            <TextField layoutX="85.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="金额" />
+            <TextField layoutX="168.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="地点" />
+            <TextField layoutX="248.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="原因" />
+            <TextField layoutX="330.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="备注" />
+            <Button id="add" layoutX="442.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="添加" />
+            <Button id="preserve" layoutX="529.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="保存" />
+            <Button id="return" layoutX="440.0" layoutY="296.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="149.0" text="返回" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>
