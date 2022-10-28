@@ -1,4 +1,3 @@
-
 .label
 {
   -fx-font-family:KaiTi;
@@ -8,8 +7,16 @@
        -fx-text-fill: black;
        -fx-font-family: "Arial Narrow";
        -fx-font-weight: bold;
-       -fx-background-color:#ADD8E6 ;
+       -fx-background-color: rgb(173, 216, 230);
        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 
 }
 .button:hover {    -fx-background-color: linear-gradient(#0081ff, #1cbbb4);}
+
+.background {
+      -fx-background-color: white;
+}
+
+.ImageView{
+       -fx-alignment: center;
+}
