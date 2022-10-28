@@ -21,7 +21,6 @@ public class OverviewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         try {
             total.setText(DataBaseHelper.getInstance().SUMMARY_Query("ID='"+ Account.getUser()+"'"));
             Log.d(this.getClass(),"数据读出");
