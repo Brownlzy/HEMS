@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -7,65 +9,93 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="199.0" prefWidth="256.0" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.LoginController">
-
+<BorderPane prefHeight="353.0" prefWidth="665.0" styleClass="background" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.LoginController">
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefHeight="331.0" prefWidth="665.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField id="userName" fx:id="userName" maxHeight="1.7976931348623157E308" promptText="请输入用户名">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" />
-               </GridPane.margin>
-            </TextField>
-            <PasswordField id="passWord" fx:id="passWord" maxHeight="1.7976931348623157E308" promptText="请输入密码" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" />
-               </GridPane.margin>
-            </PasswordField>
-            <GridPane prefHeight="57.0" prefWidth="258.0" GridPane.rowIndex="3">
+            <Pane prefHeight="260.0" prefWidth="665.0">
                <children>
-                  <Button id="clear" alignment="CENTER" cancelButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClick" text="清除" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="10.0" left="2.5" right="10.0" />
-                     </GridPane.margin>
-                     <effect>
-                        <InnerShadow />
-                     </effect>
-                  </Button>
-                  <Button fx:id="resigster" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResigsterClick" stylesheets="@../../../css/Login.css" text="注册">
-                     <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="2.5" />
-                     </GridPane.margin>
-                     <effect>
-                        <InnerShadow />
-                     </effect>
-                  </Button>
+                  <GridPane layoutX="40.0" layoutY="1.0" prefHeight="210.0" prefWidth="626.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="291.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="335.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="215.0" minHeight="10.0" prefHeight="215.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <GridPane prefHeight="234.0" prefWidth="332.0" GridPane.columnIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField id="userName" fx:id="userName" maxHeight="1.7976931348623157E308" prefHeight="61.0" prefWidth="265.0" promptText="请输入用户名">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <PasswordField id="passWord" fx:id="passWord" maxHeight="1.7976931348623157E308" prefHeight="48.0" prefWidth="312.0" promptText="请输入密码" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </PasswordField>
+                              <Button id="login" alignment="CENTER" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="25.0" prefWidth="312.0" text="登录" textAlignment="CENTER" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </Button>
+                              <GridPane prefHeight="81.0" prefWidth="332.0" GridPane.rowIndex="2">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="128.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="79.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="128.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="47.0" minHeight="9.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="4.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button id="clear" alignment="CENTER" cancelButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClearButtonClick" prefHeight="23.0" prefWidth="102.0" text="清除" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="2.5" right="10.0" />
+                                       </GridPane.margin>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="resigster" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResigsterClick" prefHeight="23.0" prefWidth="133.0" stylesheets="@../../../css/Login.css" text="注册" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="2.5" />
+                                       </GridPane.margin>
+                                       <effect>
+                                          <InnerShadow />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <ImageView fx:id="Image1" fitHeight="218.0" fitWidth="243.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageView" />
+                     </children>
+                  </GridPane>
                </children>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Button id="login" alignment="CENTER" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" text="登录" textAlignment="CENTER" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets bottom="5.0" left="10.0" right="10.0" />
-               </GridPane.margin>
-               <effect>
-                  <InnerShadow />
-               </effect>
-            </Button>
+            </Pane>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="10.0" prefHeight="308.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <padding>
             <Insets top="5.0" />
@@ -73,16 +103,16 @@
       </GridPane>
    </center>
    <top>
-      <Label fx:id="labelInfo" alignment="CENTER" styleClass="font-gray" text="欢迎登录家庭支出管理系统" textAlignment="CENTER" textFill="#bdbdbd" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="5.0" />
-         </padding>
-         <font>
-            <Font size="20.0" />
-         </font>
+      <Label fx:id="labelInfo" alignment="CENTER" prefHeight="89.0" prefWidth="451.0" styleClass="font-gray" text="欢迎登录家庭支出管理系统" textAlignment="CENTER" textFill="#bdbdbd" BorderPane.alignment="CENTER_LEFT">
          <effect>
             <InnerShadow />
          </effect>
+         <font>
+            <Font size="32.0" />
+         </font>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
       </Label>
    </top>
 </BorderPane>

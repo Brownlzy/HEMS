@@ -12,15 +12,18 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 
+
 public class HEMS extends Application {
     private Stage stage;
-
 
 
     @Override
@@ -36,7 +39,7 @@ public class HEMS extends Application {
      */
     public void gotoLogin() {
         try {
-            LoginController login = (LoginController) replaceSceneContent("login.fxml", 300, 200);
+            LoginController login = (LoginController) replaceSceneContent("login.fxml", 680, 353);
             login.setApp(this);
             stage.setTitle("登录");
         } catch (Exception ex) {
@@ -53,6 +56,11 @@ public class HEMS extends Application {
         try {
             MainController main = (MainController) replaceMainSceneContent(innerFxml, 1200, 800);
             main.setApp(this);
+
+//            final FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource(innerFxml));
+//            fxmlLoader.setRoot(this);
+//            fxmlLoader.setController(this);
+
             stage.setTitle("家庭支出管理系统");
         } catch (Exception ex) {
             ex.printStackTrace();

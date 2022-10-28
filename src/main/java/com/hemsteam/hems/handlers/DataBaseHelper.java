@@ -42,7 +42,7 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0","0");
         } catch (SQLException e) {
 
         }
@@ -81,7 +81,7 @@ public class DataBaseHelper {
 //            return true;
 //        }
         try {
-            ID_Insert(username,passwordHash);
+            ID_Insert(username,passwordHash,"0");
             return true;
         } catch (SQLException e) {
             return false;
@@ -108,7 +108,8 @@ public class DataBaseHelper {
     public void CreateTable_ID() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS ID"
                 + "(ID vchar(16) PRIMARY KEY,"
-                + "PASSWORD vchar(16))";
+                + "PASSWORD vchar(16),"
+                + "TOTAL vchar(15))";
         stmt.executeUpdate(sql);
     }
 
@@ -123,7 +124,8 @@ public class DataBaseHelper {
                 + "MONTH int(2),"
                 + "DAY int(2),"
                 + "POSITION vchar(20),"
-                + "MONEY vchar(20))";
+                + "MONEY vchar(20),"
+                + "TIP vchar(100))";
         stmt.executeUpdate(sql);
     }
 
@@ -133,12 +135,13 @@ public class DataBaseHelper {
      * @param pswd
      * @throws SQLException
      */
-    public static void ID_Insert(String id,String pswd) throws SQLException {
+    public static void ID_Insert(String id,String pswd,String total) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO ID VALUES(?,?)";
+            String sql = "INSERT INTO ID VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,pswd);
+            pstmt.setString(3,total);
             pstmt.executeUpdate();
         }
     }
@@ -154,9 +157,9 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money) throws SQLException {
+    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,type);
@@ -165,6 +168,7 @@ public class DataBaseHelper {
             pstmt.setInt(5,day);
             pstmt.setString(6,position);
             pstmt.setString(7,money);
+            pstmt.setString(8,tip);
             pstmt.executeUpdate();
         }
     }
@@ -240,7 +244,8 @@ public class DataBaseHelper {
                 System.out.print("month：" + rs.getInt(4) + " ");
                 System.out.print("day：" + rs.getInt(5) + " ");
                 System.out.print("position：" + rs.getString(6) + " ");
-                System.out.println("money：" + rs.getString(7));
+                System.out.println("money：" + rs.getString(7)+" ");
+                System.out.println("tip:" + rs.getString(8));
             }
         }
     }

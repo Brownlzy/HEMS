@@ -1,0 +1,76 @@
+.text-field {
+    -fx-alignment: left;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 8px 0 0 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 3px;
+    -fx-font-family: 仿宋;
+    -fx-background-color: rgba(238, 214, 214, 0.15);
+}
+.button {
+    -fx-background-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 0 8px 8px 0;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-font-family: 仿宋;
+}
+@font-face {
+    font-family: 'JM';
+    src: url('/css/abc.ttf');
+}
+
+#title {
+    -fx-font-size: 32;
+    -fx-font-family: 华文中宋;
+}
+
+#subtitle {
+    -fx-font-family: "JM";
+    -fx-font-size: 24;
+    -fx-border-width: 0 3px 0 0;
+    -fx-border-color: rgb(239, 207, 173);
+}
+
+.split-pane:vertical > .split-pane-divider{
+    -fx-background-color: rgb(218, 243, 255);
+}
+.split-pane:vertical{
+    -fx-background-color: white;
+}
+
+#total{
+    -fx-font-family: 华文中宋;
+    -fx-border-color: rgba(189, 153, 206, 0.22);
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-background-radius: 8px;
+    -fx-background-color: rgba(231, 231, 231, 0.12);
+    -fx-alignment:center;
+}
+
+#recent1{
+    -fx-font-family: 华文中宋;
+    -fx-border-color: rgba(189, 153, 206, 0.22);
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-background-radius: 8px;
+    -fx-background-color: rgba(231, 231, 231, 0.12);
+    -fx-alignment:center;
+}
+#recent2{
+    -fx-font-family: 华文中宋;
+    -fx-border-color: rgba(189, 153, 206, 0.22);
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-background-radius: 8px;
+    -fx-background-color: rgba(231, 231, 231, 0.12);
+    -fx-alignment:center;
+}
+
+.table-view{
+
+}
+
+
+table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}

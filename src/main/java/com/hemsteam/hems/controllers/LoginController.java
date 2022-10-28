@@ -8,7 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +24,8 @@ public class LoginController implements Initializable {
     private TextField userName;
     @FXML
     private PasswordField passWord;
+    @FXML
+    private ImageView Image1;
 
     @FXML
     protected void onLoginButtonClick() {
@@ -70,5 +75,10 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        File file = new File("src/main/resources/draw/cover.jpg");
+        String string = file.toURI().toString();
+        Image image = new Image(string);
+        Image1.setImage(image);
+
     }
 }
