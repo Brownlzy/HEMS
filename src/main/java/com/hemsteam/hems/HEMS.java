@@ -12,10 +12,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -30,7 +27,8 @@ public class HEMS extends Application {
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         stage.setTitle("");
-        gotoLogin();
+        //gotoLogin();
+        gotoMain();
         stage.show();
     }
 

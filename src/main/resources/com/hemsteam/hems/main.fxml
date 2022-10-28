@@ -179,8 +179,9 @@
                         </Accordion>
                     </children>
                 </AnchorPane>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                    <BorderPane AnchorPane.topAnchor="10" fx:id="insertionPoint"/>
+                <AnchorPane>
+                    <BorderPane fx:id="insertionPoint" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
                 </AnchorPane>
             </items>
             <padding>
