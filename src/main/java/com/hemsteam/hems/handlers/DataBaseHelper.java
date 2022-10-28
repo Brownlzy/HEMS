@@ -42,7 +42,7 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0","0");
+            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
         } catch (SQLException e) {
 
         }
@@ -81,7 +81,7 @@ public class DataBaseHelper {
 //            return true;
 //        }
         try {
-            ID_Insert(username,passwordHash,"0");
+            ID_Insert(username,passwordHash);
             return true;
         } catch (SQLException e) {
             return false;
@@ -108,8 +108,7 @@ public class DataBaseHelper {
     public void CreateTable_ID() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS ID"
                 + "(ID vchar(16) PRIMARY KEY,"
-                + "PASSWORD vchar(16),"
-                + "TOTAL vchar(15))";
+                + "PASSWORD vchar(16))";
         stmt.executeUpdate(sql);
     }
 
@@ -120,9 +119,9 @@ public class DataBaseHelper {
         String sql = "CREATE TABLE IF NOT EXISTS Data"
                 + "(ID vchar(16) PRIMARY KEY,"
                 + "TYPE vchar(10),"
-                + "YEAR int(4),"
-                + "MONTH int(2),"
-                + "DAY int(2),"
+                + "YEAR vchar(4),"
+                + "MONTH vchar(2),"
+                + "DAY vchar(2),"
                 + "POSITION vchar(20),"
                 + "MONEY vchar(20),"
                 + "TIP vchar(100))";
@@ -130,18 +129,30 @@ public class DataBaseHelper {
     }
 
     /**
+     *功能：创建SUMMARY表
+     */
+    public void CreateTable_SUMMARY() throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS ID"
+                + "(ID vchar(16) PRIMARY KEY,"
+                + "MONTH vchar(16),"
+                + "SUM vchar(16))";
+        stmt.executeUpdate(sql);
+    }
+
+
+
+    /**
      * 功能：ID表的插入
      * @param id
      * @param pswd
      * @throws SQLException
      */
-    public static void ID_Insert(String id,String pswd,String total) throws SQLException {
+    public static void ID_Insert(String id,String pswd) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO ID VALUES(?,?,?)";
+            String sql = "INSERT INTO ID VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
-            pstmt.setString(2,pswd);
-            pstmt.setString(3,total);
+            pstmt.setString(2,pswd);;
             pstmt.executeUpdate();
         }
     }
@@ -157,21 +168,40 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip) throws SQLException {
+    public static void Data_Insert(String id,String type,String year,String month,String day,String position,String money,String tip) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,type);
-            pstmt.setInt(3,year);
-            pstmt.setInt(4,month);
-            pstmt.setInt(5,day);
+            pstmt.setString(3,year);
+            pstmt.setString(4,month);
+            pstmt.setString(5,day);
             pstmt.setString(6,position);
             pstmt.setString(7,money);
             pstmt.setString(8,tip);
             pstmt.executeUpdate();
         }
     }
+
+    /**
+     * 功能：SUMMARY表的插入
+     * @param id
+     * @param month
+     * @param sum
+     * @throws SQLException
+     */
+    public static void SUMMARY_Insert(String id,String month,String sum) throws SQLException {
+        if (conn != null) {
+            String sql = "INSERT INTO SUMMARY VALUES(?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,id);
+            pstmt.setString(2,month);
+            pstmt.setString(3,sum);
+            pstmt.executeUpdate();
+        }
+    }
+
 
     /**
      * 功能：删除满足condition条件的ID表里的值
@@ -198,6 +228,20 @@ public class DataBaseHelper {
             stmt.executeUpdate(sql);
         }
     }
+
+    /**
+     * 功能：删除满足condition条件的SUMMARY表里的值
+     * @param condition
+     * @throws SQLException
+     */
+    public static void SUMMARY_Delete(String condition) throws SQLException {
+        if (conn != null) {
+            String sql = "DELETE FROM SUMMARY WHERE " + condition;
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        }
+    }
+
 
     /**
      * 功能：ID内容更新,使满足condition的数据，修改value值
@@ -228,6 +272,41 @@ public class DataBaseHelper {
     }
 
     /**
+     * 功能：SUMMARY内容更新,使满足condition的数据，修改value值
+     * @param condition
+     * @param value
+     * @throws SQLException
+     */
+    public static void SUMMARY_Update(String condition,String value) throws SQLException {
+        if (conn != null) {
+            String sql = "UPDATE SUMMARY SET " + value + " WHERE " + condition;
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        }
+    }
+
+    /**
+     * 查找满足conditon条件的ID表的内容
+     * @param condition
+     * @throws SQLException
+     */
+    public static String ID_Query(String condition) throws SQLException {
+        if (conn != null) {
+            String sql = "SELECT * FROM ID WHERE " + condition;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+//                System.out.print("id：" + rs.getString(1) + " ");
+//                System.out.print("password：" + rs.getString(2) + " ");
+                return rs.getString(2);
+            }
+        }
+        return null;
+    }
+
+
+
+    /**
      * 查找Data表的内容
      * @param condition
      * @throws SQLException
@@ -251,21 +330,22 @@ public class DataBaseHelper {
     }
 
     /**
-     * 查找满足conditon条件的ID表的内容
+     * 查找满足conditon条件的SUMMARY表的内容
      * @param condition
      * @throws SQLException
      */
-    public static String ID_Query(String condition) throws SQLException {
+    public static String SUMMARY_Query(String condition) throws SQLException {
         if (conn != null) {
-            String sql = "SELECT * FROM ID WHERE " + condition;
+            String sql = "SELECT * FROM SUMMARY WHERE " + condition;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
 //                System.out.print("id：" + rs.getString(1) + " ");
 //                System.out.print("password：" + rs.getString(2) + " ");
-                    return rs.getString(2);
+                return rs.getString(3);
             }
         }
         return null;
     }
+
 }
