@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
+
+
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="988.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.MainController">
     <top>
         <AnchorPane prefHeight="80.0">
@@ -27,161 +34,28 @@
     <center>
         <SplitPane dividerPositions="0.5">
             <items>
-                <AnchorPane maxWidth="200.0" minWidth="200" styleClass="dark-theme">
-                    <children>
-                        <Accordion styleClass="dark-theme" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <panes>
-                                <TitledPane alignment="TOP_LEFT" text="总览">
-                                    <content>
-                                        <VBox minHeight="100" spacing="10">
-                                            <children>
-                                                <Button styleClass="menu-btn" text="图书类别">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="分类统计">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                            </children>
-                                 <styleClass>
-                                    <String fx:value="VBox" />
-                                    <String fx:value="dark-theme" />
-                                 </styleClass>
-                                        </VBox>
-                                    </content>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dark-theme" />
-                              <String fx:value="menu-btn" />
-                           </styleClass>
-                                </TitledPane>
-                                <TitledPane alignment="TOP_LEFT" text="统计">
-                                    <content>
-                                        <VBox minHeight="100" spacing="10">
-                                            <children>
-                                                <Button styleClass="menu-btn" text="图书信息">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="统计分析">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                            </children>
-                                 <styleClass>
-                                    <String fx:value="dark-theme" />
-                                    <String fx:value="VBox" />
-                                 </styleClass>
-                                        </VBox>
-                                    </content>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dark-theme" />
-                              <String fx:value="menu-btn" />
-                           </styleClass>
-                                </TitledPane>
-                                <TitledPane alignment="TOP_LEFT" text="明细">
-                                    <content>
-                                        <VBox minHeight="130" spacing="10">
-                                            <children>
-                                                <Button styleClass="menu-btn" text="管理员信息">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="读者信息">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="统计分析">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                            </children>
-                                 <styleClass>
-                                    <String fx:value="VBox" />
-                                    <String fx:value="dark-theme" />
-                                 </styleClass>
-                                        </VBox>
-                                    </content>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dark-theme" />
-                              <String fx:value="menu-btn" />
-                           </styleClass>
-                                </TitledPane>
-                                <TitledPane alignment="TOP_LEFT" text="修改">
-                                    <content>
-                                        <VBox minHeight="130" spacing="10">
-                                            <children>
-                                                <Button styleClass="menu-btn" text="借阅查询">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="统计分析">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                            </children>
-                                 <styleClass>
-                                    <String fx:value="VBox" />
-                                    <String fx:value="dark-theme" />
-                                 </styleClass>
-                                        </VBox>
-                                    </content>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="dark-theme" />
-                              <String fx:value="menu-btn" />
-                           </styleClass>
-                                </TitledPane>
-                                <TitledPane alignment="TOP_LEFT" text="设置">
-                                    <content>
-                                        <VBox minHeight="130" spacing="10">
-                                            <children>
-                                                <Button styleClass="menu-btn" text="系统初始化">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="数据备份">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                                <Button styleClass="menu-btn" text="主题设置">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font></Button>
-                                            </children>
-                                 <styleClass>
-                                    <String fx:value="dark-theme" />
-                                    <String fx:value="vbox" />
-                                    <String fx:value="VBox" />
-                                 </styleClass>
-                                        </VBox>
-                                    </content>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                                    <styleClass>
-                                        <String fx:value="menu-btn"/>
-                                        <String fx:value="dark-theme"/>
-                                    </styleClass>
-                                </TitledPane>
-                            </panes>
-                        </Accordion>
-                    </children>
+                <AnchorPane maxWidth="200.0" minWidth="200" prefHeight="597.0" prefWidth="200.0" styleClass="dark-theme">
+               <children>
+                  <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="201.0" text="总览" />
+                  <TitledPane animated="false" layoutX="-1.0" layoutY="165.0" text="设置">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="76.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="124.0" text="个人信息" />
+                              <Button layoutX="76.0" layoutY="37.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="124.0" text="帮助" />
+                              <Button layoutX="76.0" layoutY="72.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="124.0" text="退出系统" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <Button layoutY="55.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="201.0" text="统计" />
+                  <Button layoutY="111.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="201.0" text="明细" />
+               </children>
                 </AnchorPane>
                 <AnchorPane>
-                    <BorderPane fx:id="insertionPoint" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
-                                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+                   <children>
+                       <BorderPane fx:id="insertionPoint" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                   </children>
                 </AnchorPane>
             </items>
             <padding>
