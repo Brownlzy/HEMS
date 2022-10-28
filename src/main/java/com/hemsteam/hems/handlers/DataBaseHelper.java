@@ -40,9 +40,19 @@ public class DataBaseHelper {
             throw new RuntimeException();
         }
 
+        //创建SUMMARY表
+        try {
+            CreateTable_SUMMARY();
+            Log.i(this.getClass(),"Build Success");
+        } catch (SQLException e) {
+            Log.e(this.getClass(),"CREATE Data ERROR");
+            throw new RuntimeException();
+        }
+
         //插入初始账户
         try {
             ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+            SUMMARY_Insert("admin","1","0");
         } catch (SQLException e) {
 
         }
@@ -132,7 +142,7 @@ public class DataBaseHelper {
      *功能：创建SUMMARY表
      */
     public void CreateTable_SUMMARY() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS ID"
+        String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
                 + "(ID vchar(16) PRIMARY KEY,"
                 + "MONTH vchar(16),"
                 + "SUM vchar(16))";
