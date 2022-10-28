@@ -8,43 +8,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-<SplitPane dividerPositions="0.135678391959799" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../css/details.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="87.0" prefWidth="598.0">
+
+<fx:root prefHeight="521.0" prefWidth="522.0" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="38.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="Label" alignment="CENTER" layoutX="-2.0" layoutY="-4.0" prefHeight="61.0" prefWidth="600.0" text="明细">
-               <font>
-                  <Font size="42.0" />
-               </font></Label>
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="337.0" prefWidth="576.0">
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="-3.0" prefHeight="41.0" prefWidth="522.0" text="明细" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="274.0" prefWidth="340.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="600.0">
-               <children>
-                  <TableView prefHeight="221.0" prefWidth="600.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="日期" />
-                      <TableColumn prefWidth="75.0" text="金额" />
-                        <TableColumn prefWidth="75.0" text="地点" />
-                        <TableColumn prefWidth="109.0" text="原因" />
-                        <TableColumn minWidth="0.0" prefWidth="115.0" text="备注" />
-                        <TableColumn minWidth="0.0" prefWidth="237.0" text="选择">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="编辑" />
-                              <TableColumn prefWidth="75.0" text="删除" />
-                           </columns></TableColumn>
-                    </columns>
-                  </TableView>
-               </children>
-            </VBox>
-            <TextField layoutX="6.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="日期" />
-            <TextField layoutX="85.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="金额" />
-            <TextField layoutX="168.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="地点" />
-            <TextField layoutX="248.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="原因" />
-            <TextField layoutX="330.0" layoutY="200.0" prefHeight="30.0" prefWidth="73.0" promptText="备注" />
-            <Button id="add" layoutX="442.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="添加" />
-            <Button id="preserve" layoutX="529.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="保存" />
-            <Button id="return" layoutX="440.0" layoutY="296.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="149.0" text="返回" />
-         </children></AnchorPane>
-  </items>
-</SplitPane>
+            <TableView layoutY="43.0" prefHeight="363.0" prefWidth="522.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="时间" />
+                <TableColumn prefWidth="75.0" text="金额" />
+                  <TableColumn prefWidth="75.0" text="地点" />
+                  <TableColumn prefWidth="163.0" text="类型" />
+                  <TableColumn prefWidth="133.0" text="操作">
+                     <columns>
+                        <TableColumn prefWidth="70.0" text="编辑" />
+                        <TableColumn text="删除" />
+                     </columns>
+                  </TableColumn>
+              </columns>
+            </TableView>
+            <MenuButton layoutY="14.0" mnemonicParsing="false" text="排序方式">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <Button layoutX="175.0" layoutY="425.0" mnemonicParsing="false" text="增加" />
+            <Button layoutX="296.0" layoutY="426.0" mnemonicParsing="false" text="返回" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</fx:root>
