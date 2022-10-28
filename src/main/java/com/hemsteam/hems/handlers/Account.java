@@ -14,12 +14,12 @@ public class Account {
     public static final int LOGIN_PASSWORD_INVALID = 2;
     public static final int LOGIN_USERNAME_NOT_EXISTS = 3;
     public static final int LOGIN_PASSWORD_ERROR = 4;
-    private String user;
+    private static String user;
 
     private static Account account;
 
     private Account() {
-        user = "UnLogin";
+        user = "admin";
     }
 
     public static Account getInstance() {
@@ -28,7 +28,7 @@ public class Account {
         return account;
     }
 
-    public String getUser() {
+    public static String getUser() {
         return user;
     }
 

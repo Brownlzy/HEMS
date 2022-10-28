@@ -4,6 +4,7 @@ package com.hemsteam.hems;
 import com.hemsteam.hems.controllers.LoginController;
 import com.hemsteam.hems.controllers.MainController;
 import com.hemsteam.hems.controllers.ResigsterController;
+import com.hemsteam.hems.controllers.OverviewController;
 import com.hemsteam.hems.utils.Log;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.net.URL;
+import java.sql.SQLException;
+
 
 public class HEMS extends Application {
     private Stage stage;
-
 
 
     @Override
@@ -27,6 +29,7 @@ public class HEMS extends Application {
         stage = primaryStage;
         stage.setTitle("");
         gotoLogin();
+        //gotoMain();
         stage.show();
     }
 
@@ -35,7 +38,7 @@ public class HEMS extends Application {
      */
     public void gotoLogin() {
         try {
-            LoginController login = (LoginController) replaceSceneContent("login.fxml", 300, 200);
+            LoginController login = (LoginController) replaceSceneContent("login.fxml", 680, 353);
             login.setApp(this);
             stage.setTitle("登录");
         } catch (Exception ex) {
@@ -48,14 +51,24 @@ public class HEMS extends Application {
     /**
      * 跳转到主界面
      */
-    public void gotoMain() {
+    public void gotoMain(String innerFxml) {
         try {
-            MainController main = (MainController) replaceSceneContent("main.fxml", 1200, 800);
+            MainController main = (MainController) replaceMainSceneContent(innerFxml, 1200, 800);
             main.setApp(this);
+
+//            final FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource(innerFxml));
+//            fxmlLoader.setRoot(this);
+//            fxmlLoader.setController(this);
+
             stage.setTitle("家庭支出管理系统");
         } catch (Exception ex) {
+            ex.printStackTrace();
             Log.d(this.getClass(), "主页面跳转异常！");
         }
+    }
+
+    public void gotoMain() {
+        gotoMain("overview.fxml");
     }
 
     public void gotoResigster() {
@@ -90,9 +103,31 @@ public class HEMS extends Application {
         return (Initializable) loader.getController();
     }
 
+    private Initializable replaceMainSceneContent(String fxml, int width, int height) throws Exception {
+        FXMLLoader outerLoader = new FXMLLoader(getClass().getResource("main.fxml"));
 
+        Scene scene = new Scene(outerLoader.load(), width, height);
 
+        URL inner = getClass().getResource(fxml);
+        // URL inner = getClass().getResource("inner2.fxml");
 
+        FXMLLoader innerLoader = new FXMLLoader(inner);
+
+        // get insertion point from outer fxml
+        innerLoader.setRoot(outerLoader.getNamespace().get("insertionPoint"));
+
+        innerLoader.load();
+
+        try {
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(this.getClass(), "页面加载异常！");
+        }
+        return (Initializable) outerLoader.getController();
+    }
 
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
