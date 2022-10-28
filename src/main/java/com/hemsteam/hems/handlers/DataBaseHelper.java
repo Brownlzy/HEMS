@@ -42,7 +42,7 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0","0");
+            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
         } catch (SQLException e) {
 
         }
@@ -81,7 +81,7 @@ public class DataBaseHelper {
 //            return true;
 //        }
         try {
-            ID_Insert(username,passwordHash,"0");
+            ID_Insert(username,passwordHash);
             return true;
         } catch (SQLException e) {
             return false;
@@ -108,8 +108,7 @@ public class DataBaseHelper {
     public void CreateTable_ID() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS ID"
                 + "(ID vchar(16) PRIMARY KEY,"
-                + "PASSWORD vchar(16),"
-                + "TOTAL vchar(15))";
+                + "PASSWORD vchar(16))";
         stmt.executeUpdate(sql);
     }
 
@@ -130,18 +129,30 @@ public class DataBaseHelper {
     }
 
     /**
+     *功能：创建ID表
+     */
+    public void CreateTable_SUMMARY() throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS ID"
+                + "(ID vchar(16) PRIMARY KEY,"
+                + "MONTH vchar(16),"
+                + "SUM vchar(16))";
+        stmt.executeUpdate(sql);
+    }
+
+
+
+    /**
      * 功能：ID表的插入
      * @param id
      * @param pswd
      * @throws SQLException
      */
-    public static void ID_Insert(String id,String pswd,String total) throws SQLException {
+    public static void ID_Insert(String id,String pswd) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO ID VALUES(?,?,?)";
+            String sql = "INSERT INTO ID VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
-            pstmt.setString(2,pswd);
-            pstmt.setString(3,total);
+            pstmt.setString(2,pswd);;
             pstmt.executeUpdate();
         }
     }
