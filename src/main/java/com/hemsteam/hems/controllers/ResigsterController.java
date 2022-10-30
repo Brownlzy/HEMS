@@ -1,5 +1,6 @@
 package com.hemsteam.hems.controllers;
 
+import com.hemsteam.hems.handlers.DataBaseHelper;
 import com.hemsteam.hems.HEMS;
 import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.utils.Log;
@@ -10,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ResigsterController implements Initializable {
@@ -66,8 +68,7 @@ public class ResigsterController implements Initializable {
         this.hems = hems;
     }
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     /**
      * 返回 用户名
