@@ -1,6 +1,9 @@
 package com.hemsteam.hems.handlers;
 
+import com.hemsteam.hems.utils.Log;
 import com.hemsteam.hems.utils.SHA256;
+
+import java.util.Date;
 
 public class Account {
     public static final int RESIGSTER_SUCCESSFUL = 0;
@@ -14,6 +17,22 @@ public class Account {
     public static final int LOGIN_USERNAME_NOT_EXISTS = 3;
     public static final int LOGIN_PASSWORD_ERROR = 4;
     private static String user;
+    private static int year;
+    private static int month;
+
+    public static void setYearMonth(int y, int m) {
+        year = y;
+        month = m;
+        Log.i(Account.class, "year:" + y + " month:" + m);
+    }
+
+    public static int getYear() {
+        return year + 1900;
+    }
+
+    public static int getMonth() {
+        return month;
+    }
 
     private static Account account;
 
@@ -43,6 +62,7 @@ public class Account {
         if (!pwHash.equals(SHA256.getSHA256StrJava("HEMS" + pw))) return LOGIN_PASSWORD_ERROR;
         //登录成功
         user = un;
+        setYearMonth(new Date().getYear(), new Date().getMonth());
         return LOGIN_SUCCESSFUL;
     }
 
