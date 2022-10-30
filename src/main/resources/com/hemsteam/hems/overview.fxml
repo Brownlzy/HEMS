@@ -29,7 +29,7 @@
                         <Font size="28.0" />
                     </font>
                 </Label>
-                <PieChart layoutX="241.0" layoutY="144.0" prefHeight="198.0" prefWidth="215.0" title="CHART" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="144.0" />
+                <PieChart fx:id="pieChart" layoutX="241.0" layoutY="144.0" prefHeight="307.0" prefWidth="383.0" title="CHART" AnchorPane.leftAnchor="241.0" AnchorPane.topAnchor="144.0" />
                 <Label id="subtitle" layoutX="62.0" layoutY="144.0" prefHeight="38.0" prefWidth="109.0" text="支出分析" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="144.0">
                     <font>
                         <Font size="28.0" />
