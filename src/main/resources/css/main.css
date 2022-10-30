@@ -1,9 +1,17 @@
 
 
-.text-field {
+.text-field1 {
     -fx-alignment: left;
     -fx-border-color: rgba(176, 218, 232, 0.85);
     -fx-border-radius: 8px 0 0 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 3px;
+    -fx-font-family: 仿宋;
+    -fx-background-color: rgba(238, 214, 214, 0.15);
+}
+.text-field2 {
+    -fx-alignment: left;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
     -fx-background-radius: 8px;
     -fx-border-width: 3px;
     -fx-font-family: 仿宋;
@@ -36,7 +44,14 @@
     -fx-background-radius: 8px;
     -fx-border-color: rgba(176, 218, 232, 0.85);
     -fx-border-radius: 8px;
-    -fx-borde-width: 0;
+    -fx-border-width: 3px;
 }
 
-
+.combo-box .arrow-button{
+    -fx-background-color:rgba(176, 218, 232, 0.85);
+    -fx-background-radius: 0 6px 6px 0;
+    -fx-border-style:none;
+    -fx-border-width: 2px;
+    -fx-border-radius: 0 8px 8px 0;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
+}
