@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="988.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.MainController">
     <top>
         <AnchorPane prefHeight="80.0">
@@ -18,40 +23,31 @@
                     </font>
 
                 </Label>
-
-                <Button fx:id="exit" onAction="#onExitButtonClick" styleClass="menu-btn" stylesheets="@../../../css/main.css" text="退出系统" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
+                <TextField layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0" promptText="输入需要查询的年份" styleClass="text-field" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="22.0" />
+                <Button id="search" layoutX="697.0" layoutY="22.0" mnemonicParsing="false" prefHeight="36" prefWidth="40.0" styleClass="button1" text="查询" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="22.0" />
+            <ComboBox editable="true" layoutX="761.0" layoutY="23.0" prefHeight="36.0" prefWidth="191.0" promptText="输入或选择需要查询的月份" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="23.0" />
             </children>
         </AnchorPane>
     </top>
     <center>
         <SplitPane dividerPositions="0.5">
             <items>
-                <AnchorPane maxWidth="200.0" minWidth="200" prefHeight="597.0" prefWidth="200.0"
-                            styleClass="dark-theme">
+                <AnchorPane maxWidth="200.0" minWidth="200" prefHeight="597.0" prefWidth="200.0" styleClass="dark-theme">
                     <children>
-                        <Button fx:id="overview" layoutY="-1.0" mnemonicParsing="false" onAction="#onOverviewClick"
-                                prefHeight="56.0" prefWidth="201.0" text="总览"/>
+                        <Button fx:id="overview" layoutY="-1.0" mnemonicParsing="false" onAction="#onOverviewClick" prefHeight="56.0" prefWidth="201.0" text="总览" />
                         <TitledPane animated="false" layoutX="-1.0" layoutY="165.0" text="设置">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="user" layoutX="76.0" mnemonicParsing="false"
-                                                onAction="#onUserClick"
-                                                prefHeight="37.0" prefWidth="124.0" text="个人信息"/>
-                                        <Button fx:id="help" layoutX="76.0" layoutY="37.0" mnemonicParsing="false"
-                                                onAction="#onHelpClick" prefHeight="37.0" prefWidth="124.0"
-                                                text="帮助"/>
-                                        <Button fx:id="exit1" layoutX="76.0" layoutY="72.0" mnemonicParsing="false"
-                                                onAction="#onExitClick" prefHeight="37.0" prefWidth="124.0"
-                                                text="退出系统"/>
+                                        <Button fx:id="user" layoutX="76.0" mnemonicParsing="false" onAction="#onUserClick" prefHeight="37.0" prefWidth="124.0" text="个人信息" />
+                                        <Button fx:id="help" layoutX="76.0" layoutY="37.0" mnemonicParsing="false" onAction="#onHelpClick" prefHeight="37.0" prefWidth="124.0" text="帮助" />
+                                        <Button fx:id="exit1" layoutX="76.0" layoutY="72.0" mnemonicParsing="false" onAction="#onExitClick" prefHeight="37.0" prefWidth="124.0" text="退出系统" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </TitledPane>
-                        <Button fx:id="stats" layoutY="55.0" mnemonicParsing="false" onAction="#onStatsClick"
-                                prefHeight="56.0" prefWidth="201.0" text="统计"/>
-                        <Button fx:id="details" layoutY="111.0" mnemonicParsing="false" onAction="#onDetailsClick"
-                                prefHeight="56.0" prefWidth="201.0" text="明细"/>
+                        <Button fx:id="stats" layoutY="55.0" mnemonicParsing="false" onAction="#onStatsClick" prefHeight="56.0" prefWidth="201.0" text="统计" />
+                        <Button fx:id="details" layoutY="111.0" mnemonicParsing="false" onAction="#onDetailsClick" prefHeight="56.0" prefWidth="201.0" text="明细" />
                     </children>
                 </AnchorPane>
                 <AnchorPane>

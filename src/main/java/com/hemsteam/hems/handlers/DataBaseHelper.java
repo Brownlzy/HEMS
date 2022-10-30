@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataBaseHelper {
@@ -58,8 +59,8 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
-            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"0");
+            ID_Insert("admin", "44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+            SUMMARY_Insert("admin", getYearMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1), "AllType", "0");
         } catch (SQLException e) {
 
         }
@@ -99,7 +100,7 @@ public class DataBaseHelper {
 //        }
         try {
             ID_Insert(username,passwordHash);
-            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"0");
+            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"AllType","0");
             return true;
         } catch (SQLException e) {
             return false;
@@ -142,7 +143,8 @@ public class DataBaseHelper {
                 + "DAY int(2),"
                 + "POSITION vchar(20),"
                 + "MONEY vchar(20),"
-                + "TIP vchar(100))";
+                + "TIP vchar(100),"
+                + "IN_TIME vchar(15))";
         stmt.executeUpdate(sql);
     }
 
@@ -151,8 +153,9 @@ public class DataBaseHelper {
      */
     public void CreateTable_SUMMARY() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
-                + "(ID vchar(16) PRIMARY KEY,"
+                + "(ID vchar(16),"
                 + "MONTH int(16),"
+                + "TYPE vhar(16),"
                 + "SUM vchar(16))";
         stmt.executeUpdate(sql);
     }
@@ -186,9 +189,9 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip) throws SQLException {
+    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip,String in_time) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,type);
@@ -198,6 +201,7 @@ public class DataBaseHelper {
             pstmt.setString(6,position);
             pstmt.setString(7,money);
             pstmt.setString(8,tip);
+            pstmt.setString(9,in_time);
             pstmt.executeUpdate();
         }
     }
@@ -209,13 +213,14 @@ public class DataBaseHelper {
      * @param sum
      * @throws SQLException
      */
-    public static void SUMMARY_Insert(String id,int month,String sum) throws SQLException {
+    public static void SUMMARY_Insert(String id,int month,String type,String sum) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO SUMMARY VALUES(?,?,?)";
+            String sql = "INSERT INTO SUMMARY VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setInt(2,month);
-            pstmt.setString(3,sum);
+            pstmt.setString(3,type);
+            pstmt.setString(4,sum);
             pstmt.executeUpdate();
         }
     }
@@ -343,7 +348,8 @@ public class DataBaseHelper {
                                 rs.getString(2),
                                 rs.getString(6),
                                 Double.parseDouble(rs.getString(7)),
-                                rs.getString(8)
+                                rs.getString(8),
+                                rs.getString(9)
                         )
                 );
 //                System.out.print("id：" + rs.getString(1) + " ");
@@ -360,17 +366,20 @@ public class DataBaseHelper {
 
     /**
      * 查找满足conditon条件的SUMMARY表的内容
+     *
      * @param condition
      * @throws SQLException
      */
-    public static String SUMMARY_Query(String condition) throws SQLException {
+    public static HashMap<String, Double> SUMMARY_Query(String condition) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM SUMMARY WHERE " + condition;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            HashMap<String, Double> typeMap = new HashMap<>();
             while (rs.next()) {
-                return rs.getString(3);
+                typeMap.put(rs.getString(3), Double.valueOf(rs.getString(4)));
             }
+            return typeMap;
         }
         return null;
     }
@@ -432,5 +441,34 @@ public class DataBaseHelper {
             return FXCollections.observableArrayList();
         }
         return result;
+    }
+
+    public boolean putDetails(Details details) {
+        try {
+            Data_Update("IN_TIME='" + details.inTime + "'", "TYPE='" + details.type +
+                    "', YEAR=" + (details.date.getYear() + 1900) + ", MONTH=" + (details.date.getMonth() + 1) +
+                    ", DAY=" + details.date.getDate() + ", POSITION='" + details.position + "', MONEY='" + details.money +
+                    "', TIP='" + details.tip + "'"
+            );
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addDetails(Details details) {
+        try {
+            Data_Insert(details.id, details.type, details.date.getYear() + 1900, details.date.getMonth() + 1, details.date.getDate(),
+                    details.position, details.money, details.tip, details.inTime);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static int getYearMonth(int year, int month) {
+        return year * 100 + month;
     }
 }

@@ -1,18 +1,4 @@
-.text-field {
-    -fx-alignment: left;
-    -fx-border-color: rgba(176, 218, 232, 0.85);
-    -fx-border-radius: 8px 0 0 8px;
-    -fx-background-radius: 8px;
-    -fx-border-width: 3px;
-    -fx-font-family: 仿宋;
-    -fx-background-color: rgba(238, 214, 214, 0.15);
-}
-.button {
-    -fx-background-color: rgba(176, 218, 232, 0.85);
-    -fx-border-radius: 0 8px 8px 0;
-    -fx-background-radius: 0 8px 8px 0;
-    -fx-font-family: 仿宋;
-}
+
 @font-face {
     font-family: 'JM';
     src: url('/css/abc.ttf');

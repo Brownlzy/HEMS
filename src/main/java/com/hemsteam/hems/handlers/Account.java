@@ -27,7 +27,7 @@ public class Account {
     }
 
     public static int getYear() {
-        return year + 1900;
+        return year;
     }
 
     public static int getMonth() {
@@ -62,7 +62,7 @@ public class Account {
         if (!pwHash.equals(SHA256.getSHA256StrJava("HEMS" + pw))) return LOGIN_PASSWORD_ERROR;
         //登录成功
         user = un;
-        setYearMonth(new Date().getYear(), new Date().getMonth());
+        setYearMonth(new Date().getYear() + 1900, new Date().getMonth() + 1);
         return LOGIN_SUCCESSFUL;
     }
 

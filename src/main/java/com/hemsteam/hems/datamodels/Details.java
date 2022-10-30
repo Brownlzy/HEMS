@@ -17,7 +17,15 @@ public class Details {
     }
 
     public void setTime(String time) {
-        this.time = time;
+        try {
+            date = new Date(Integer.parseInt(time.split("-")[0]),
+                    Integer.parseInt(time.split("-")[1]) - 1,
+                    Integer.parseInt(time.split("-")[2])
+            );
+            this.time = String.format("%tF%n", this.date);
+            ;
+        } catch (Exception ignored) {
+        }
     }
 
     public String getType() {
@@ -59,18 +67,25 @@ public class Details {
     public String position;
     public double moneyD;
 
+    public String inTime;
+
     public String getMoney() {
         return money;
     }
 
     public void setMoney(String money) {
-        this.money = money;
+        try {
+            moneyD = Double.parseDouble(money);
+            this.money = money;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String money;
     public String tip;
 
-    public Details(String id, Date date, String type, String position, double money, String tip) {
+    public Details(String id, Date date, String type, String position, double money, String tip, String inTime) {
         this.id = id;
         this.date = date;
         this.time = String.format("%tF%n", this.date);
@@ -79,9 +94,10 @@ public class Details {
         this.moneyD = money;
         this.money = String.valueOf(moneyD);
         this.tip = tip;
+        this.inTime = inTime;
     }
 
-    public Details(String id, int year, int month, int day, String type, String position, double money, String tip) {
+    public Details(String id, int year, int month, int day, String type, String position, double money, String tip, String inTime) {
         this.id = id;
         Calendar c1 = Calendar.getInstance();
         c1.set(year, month - 1, day);
@@ -92,6 +108,7 @@ public class Details {
         this.moneyD = money;
         this.money = String.valueOf(moneyD);
         this.tip = tip;
+        this.inTime = inTime;
     }
 
     @Override

@@ -7,7 +7,21 @@
    -fx-background-color: rgb(95, 184, 120);
    -fx-text-fill: #fff;
 }
-
+.text-field {
+    -fx-alignment: left;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 8px 0 0 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 3px;
+    -fx-font-family: 仿宋;
+    -fx-background-color: rgba(238, 214, 214, 0.15);
+}
+.button1 {
+    -fx-background-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 0 8px 8px 0;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-font-family: 仿宋;
+}
 .gray-theme {
    -fx-background-color: rgb(210, 210, 210);
    -fx-text-fill: #fff;
@@ -51,5 +65,12 @@
    -fx-text-fill: #fff;
 }
 
+.combo-box{
+    -fx-background-color: rgba(238, 214, 214, 0.15);
+    -fx-background-radius: 8px;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 8px;
+    -fx-borde-width: 0;
+}
 
 

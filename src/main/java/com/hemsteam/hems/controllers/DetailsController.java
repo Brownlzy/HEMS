@@ -15,9 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -29,7 +31,7 @@ public class DetailsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        data = DataBaseHelper.getInstance().getDetails();
+        data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
 //        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
 //        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
 //        positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
@@ -72,6 +74,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setTime(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -83,6 +88,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setType(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -95,6 +103,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setPosition(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -106,6 +117,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setTip(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -119,6 +133,9 @@ public class DetailsController implements Initializable {
                             ((Details) t.getTableView().getItems().get(
                                     t.getTablePosition().getRow())
                             ).setMoney(t.getNewValue());
+                            saveData(((Details) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ));
                         } catch (Exception ignored) {
 
                         }
@@ -131,11 +148,24 @@ public class DetailsController implements Initializable {
 
     @FXML
     protected void onAddClick() {
-        data.add(
-                new Details(Account.getUser(), new Date(), "双击修改", "双击修改", 0, "双击修改")
-        );
+        Details details =
+                new Details(
+                        Account.getUser(),
+                        new Date(),
+                        "其他",
+                        "双击修改",
+                        0,
+                        "双击修改",
+                        String.valueOf(new Date().getTime()));
+        data.add(details);
+        DataBaseHelper.getInstance().addDetails(details);
         onEnableEdit();
     }
+
+    protected void saveData(Details details) {
+        DataBaseHelper.getInstance().putDetails(details);
+    }
+
     @FXML
     void onExportClick() {
         try {
