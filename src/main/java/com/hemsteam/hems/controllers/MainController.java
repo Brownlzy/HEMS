@@ -1,11 +1,13 @@
 package com.hemsteam.hems.controllers;
 
 import com.hemsteam.hems.HEMS;
+import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.utils.Log;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
@@ -17,6 +19,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button overview;
+    @FXML
+    private Button query;
 
     @FXML
     private Button help;
@@ -81,6 +85,19 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        year.setText(String.valueOf(Account.getYear()));
+        month.setText(String.valueOf(Account.getMonth()));
+    }
 
+    @FXML
+    protected TextField year;
+    @FXML
+    protected TextField month;
+
+    @FXML
+    protected void onQueryClick() {
+        Account.setYearMonth(Integer.parseInt(year.getText()),
+                Integer.parseInt(month.getText()));
+        hems.gotoMain(Account.getPage());
     }
 }
