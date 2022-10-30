@@ -471,4 +471,12 @@ public class DataBaseHelper {
     public static int getYearMonth(int year, int month) {
         return year * 100 + month;
     }
+
+    public HashMap<String, Double> getTypeMoneyMap(String id, int year, int month) {
+        try {
+            return SUMMARY_Query("ID='" + Account.getUser() + "' and MONTH=" + DataBaseHelper.getYearMonth(Account.getYear(), Account.getMonth()));
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }
