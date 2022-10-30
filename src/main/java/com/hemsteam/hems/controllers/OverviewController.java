@@ -27,7 +27,7 @@ public class OverviewController implements Initializable {
                     DataBaseHelper.getInstance().SUMMARY_Query(
                             "ID='" + Account.getUser() + "' and MONTH=" +
                                     DataBaseHelper.getYearMonth(Account.getYear(), Account.getMonth()));
-            total.setText(String.valueOf(DataBaseHelper.getInstance().SUMMARY_Query("ID='" + Account.getUser() + "' and MONTH=" + DataBaseHelper.getYearMonth(Account.getYear(), Account.getMonth())).get("AllType")));
+            total.setText(String.valueOf(DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth()).get("AllType")));
             Log.d(this.getClass(), "数据读出");
         } catch (SQLException e) {
             throw new RuntimeException(e);
