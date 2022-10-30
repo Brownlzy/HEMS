@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class DataBaseHelper {
         //插入初始账户
         try {
             ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
-            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"0");
+            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"AllType","0");
         } catch (SQLException e) {
 
         }
@@ -99,7 +100,7 @@ public class DataBaseHelper {
 //        }
         try {
             ID_Insert(username,passwordHash);
-            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"0");
+            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"AllType","0");
             return true;
         } catch (SQLException e) {
             return false;
@@ -154,6 +155,7 @@ public class DataBaseHelper {
         String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
                 + "(ID vchar(16),"
                 + "MONTH int(16),"
+                + "TYPE vhar(16),"
                 + "SUM vchar(16))";
         stmt.executeUpdate(sql);
     }
@@ -211,13 +213,14 @@ public class DataBaseHelper {
      * @param sum
      * @throws SQLException
      */
-    public static void SUMMARY_Insert(String id,int month,String sum) throws SQLException {
+    public static void SUMMARY_Insert(String id,int month,String type,String sum) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO SUMMARY VALUES(?,?,?)";
+            String sql = "INSERT INTO SUMMARY VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setInt(2,month);
-            pstmt.setString(3,sum);
+            pstmt.setString(3,type);
+            pstmt.setString(4,sum);
             pstmt.executeUpdate();
         }
     }
@@ -371,7 +374,7 @@ public class DataBaseHelper {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                return rs.getString(3);
+                return rs.getString(4);
             }
         }
         return null;
