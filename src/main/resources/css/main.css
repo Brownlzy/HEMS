@@ -65,5 +65,12 @@
    -fx-text-fill: #fff;
 }
 
+.combo-box{
+    -fx-background-color: rgba(238, 214, 214, 0.15);
+    -fx-background-radius: 8px;
+    -fx-border-color: rgba(176, 218, 232, 0.85);
+    -fx-border-radius: 8px;
+    -fx-borde-width: 0;
+}
 
 
