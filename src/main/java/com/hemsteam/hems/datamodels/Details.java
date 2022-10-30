@@ -18,13 +18,13 @@ public class Details {
 
     public void setTime(String time) {
         try {
-            date = new Date(Integer.parseInt(time.split("-")[0]),
+            date = new Date(Integer.parseInt(time.split("-")[0]) - 1900,
                     Integer.parseInt(time.split("-")[1]) - 1,
                     Integer.parseInt(time.split("-")[2])
             );
             this.time = String.format("%tF%n", this.date);
-            ;
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
