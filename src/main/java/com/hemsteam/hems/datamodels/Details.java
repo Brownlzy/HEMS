@@ -84,7 +84,7 @@ public class Details {
 
     @Override
     public String toString() {
-        return id + "," + String.format("%tF%n", date) + "," + type + "," + position + "," + money + "," + tip;
+        return id + "," + String.format("%tF", date) + "," + type + "," + position + "," + money + "," + tip;
     }
 
     public static String toFormatString() {
