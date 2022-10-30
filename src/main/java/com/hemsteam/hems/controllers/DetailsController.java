@@ -1,10 +1,11 @@
 package com.hemsteam.hems.controllers;
 
 import com.hemsteam.hems.datamodels.Details;
+import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.handlers.DataBaseHelper;
 import com.hemsteam.hems.utils.Log;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.*;
 import java.net.URL;
@@ -28,12 +30,13 @@ public class DetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         data = DataBaseHelper.getInstance().getDetails();
-        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
-        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
-        positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("type"));
-        tipColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("tip"));
-        detailsTable.setItems(data);
+//        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
+//        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
+//        positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
+//        typeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("type"));
+//        tipColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("tip"));
+//        detailsTable.setItems(data);
+        onEnableEdit();
     }
 
     @FXML
@@ -53,8 +56,85 @@ public class DetailsController implements Initializable {
     private Label tips;
 
     @FXML
-    void onTableSort(ActionEvent event) {
+    void onEnableEdit() {
+        detailsTable.setEditable(true);
+        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
+        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
+        positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("type"));
+        tipColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("tip"));
 
+        timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        timeColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                        ((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setTime(t.getNewValue());
+                    }
+                }
+        );
+        typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                        ((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setType(t.getNewValue());
+                    }
+                }
+        );
+
+        positionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        positionColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                        ((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setPosition(t.getNewValue());
+                    }
+                }
+        );
+        tipColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        tipColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                        ((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setTip(t.getNewValue());
+                    }
+                }
+        );
+
+        moneyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        moneyColumn.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                        try {
+                            ((Details) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ).setMoney(t.getNewValue());
+                        } catch (Exception ignored) {
+
+                        }
+                    }
+                }
+        );
+        detailsTable.setItems(data);
+        //detailsTable.getColumns().addAll(timeColumn, moneyColumn, typeColumn);
+    }
+
+    @FXML
+    protected void onAddClick() {
+        data.add(
+                new Details(Account.getUser(), new Date(), "双击修改", "双击修改", 0, "双击修改")
+        );
+        onEnableEdit();
     }
     @FXML
     void onExportClick() {
