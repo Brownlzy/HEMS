@@ -6,10 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataBaseHelper {
@@ -59,8 +59,8 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
-            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"AllType","0");
+            ID_Insert("admin", "44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+            SUMMARY_Insert("admin", getYearMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1), "AllType", "0");
         } catch (SQLException e) {
 
         }
@@ -366,17 +366,20 @@ public class DataBaseHelper {
 
     /**
      * 查找满足conditon条件的SUMMARY表的内容
+     *
      * @param condition
      * @throws SQLException
      */
-    public static String SUMMARY_Query(String condition) throws SQLException {
+    public static HashMap<String, Double> SUMMARY_Query(String condition) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM SUMMARY WHERE " + condition;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            HashMap<String, Double> typeMap = new HashMap<>();
             while (rs.next()) {
-                return rs.getString(4);
+                typeMap.put(rs.getString(3), Double.valueOf(rs.getString(4)));
             }
+            return typeMap;
         }
         return null;
     }
@@ -463,5 +466,9 @@ public class DataBaseHelper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static int getYearMonth(int year, int month) {
+        return year * 100 + month;
     }
 }
