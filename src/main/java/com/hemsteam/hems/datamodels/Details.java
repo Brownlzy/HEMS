@@ -59,6 +59,8 @@ public class Details {
     public String position;
     public double moneyD;
 
+    public String inTime;
+
     public String getMoney() {
         return money;
     }
@@ -70,7 +72,7 @@ public class Details {
     public String money;
     public String tip;
 
-    public Details(String id, Date date, String type, String position, double money, String tip) {
+    public Details(String id, Date date, String type, String position, double money, String tip, String inTime) {
         this.id = id;
         this.date = date;
         this.time = String.format("%tF%n", this.date);
@@ -79,9 +81,10 @@ public class Details {
         this.moneyD = money;
         this.money = String.valueOf(moneyD);
         this.tip = tip;
+        this.inTime = inTime;
     }
 
-    public Details(String id, int year, int month, int day, String type, String position, double money, String tip) {
+    public Details(String id, int year, int month, int day, String type, String position, double money, String tip, String inTime) {
         this.id = id;
         Calendar c1 = Calendar.getInstance();
         c1.set(year, month - 1, day);
@@ -92,6 +95,7 @@ public class Details {
         this.moneyD = money;
         this.money = String.valueOf(moneyD);
         this.tip = tip;
+        this.inTime = inTime;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class DetailsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        data = DataBaseHelper.getInstance().getDetails();
+        data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
 //        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
 //        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
 //        positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
@@ -122,8 +122,19 @@ public class DetailsController implements Initializable {
     @FXML
     protected void onAddClick() {
         data.add(
-                new Details(Account.getUser(), new Date(), "双击修改", "双击修改", 0, "双击修改")
+                new Details(
+                        Account.getUser(),
+                        new Date(),
+                        "双击修改",
+                        "双击修改",
+                        0,
+                        "双击修改",
+                        String.valueOf(new Date().getTime()))
         );
         onEnableEdit();
+    }
+
+    protected void saveData() {
+        DataBaseHelper.getInstance().putDetails(data);
     }
 }

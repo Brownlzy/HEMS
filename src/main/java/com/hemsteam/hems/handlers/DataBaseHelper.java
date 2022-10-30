@@ -345,7 +345,8 @@ public class DataBaseHelper {
                                 rs.getString(2),
                                 rs.getString(6),
                                 Double.parseDouble(rs.getString(7)),
-                                rs.getString(8)
+                                rs.getString(8),
+                                rs.getString(9)
                         )
                 );
 //                System.out.print("id：" + rs.getString(1) + " ");
@@ -434,5 +435,10 @@ public class DataBaseHelper {
             return FXCollections.observableArrayList();
         }
         return result;
+    }
+
+    public boolean putDetails(List<Details> list) {
+
+        return false;
     }
 }
