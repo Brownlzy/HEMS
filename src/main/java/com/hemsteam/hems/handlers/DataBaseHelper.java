@@ -348,7 +348,8 @@ public class DataBaseHelper {
                                 rs.getString(2),
                                 rs.getString(6),
                                 Double.parseDouble(rs.getString(7)),
-                                rs.getString(8)
+                                rs.getString(8),
+                                rs.getString(9)
                         )
                 );
 //                System.out.print("id：" + rs.getString(1) + " ");
@@ -437,5 +438,30 @@ public class DataBaseHelper {
             return FXCollections.observableArrayList();
         }
         return result;
+    }
+
+    public boolean putDetails(Details details) {
+        try {
+            Data_Update("IN_TIME='" + details.inTime + "'", "TYPE='" + details.type +
+                    "', YEAR=" + (details.date.getYear() + 1900) + ", MONTH=" + (details.date.getMonth() + 1) +
+                    ", DAY=" + details.date.getDate() + ", POSITION='" + details.position + "', MONEY='" + details.money +
+                    "', TIP='" + details.tip + "'"
+            );
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addDetails(Details details) {
+        try {
+            Data_Insert(details.id, details.type, details.date.getYear() + 1900, details.date.getMonth() + 1, details.date.getDate(),
+                    details.position, details.money, details.tip, details.inTime);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
