@@ -142,7 +142,8 @@ public class DataBaseHelper {
                 + "DAY int(2),"
                 + "POSITION vchar(20),"
                 + "MONEY vchar(20),"
-                + "TIP vchar(100))";
+                + "TIP vchar(100),"
+                + "IN_TIME vchar(15))";
         stmt.executeUpdate(sql);
     }
 
@@ -151,7 +152,7 @@ public class DataBaseHelper {
      */
     public void CreateTable_SUMMARY() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
-                + "(ID vchar(16) PRIMARY KEY,"
+                + "(ID vchar(16),"
                 + "MONTH int(16),"
                 + "SUM vchar(16))";
         stmt.executeUpdate(sql);
@@ -186,9 +187,9 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip) throws SQLException {
+    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip,String in_time) throws SQLException {
         if (conn != null) {
-            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,type);
@@ -198,6 +199,7 @@ public class DataBaseHelper {
             pstmt.setString(6,position);
             pstmt.setString(7,money);
             pstmt.setString(8,tip);
+            pstmt.setString(9,in_time);
             pstmt.executeUpdate();
         }
     }
