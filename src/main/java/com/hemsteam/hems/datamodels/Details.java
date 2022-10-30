@@ -36,12 +36,12 @@ public class Details {
         this.position = position;
     }
 
-    public double getMoney() {
-        return money;
+    public double getMoneyD() {
+        return moneyD;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public void setMoneyD(double money) {
+        this.moneyD = money;
     }
 
     public String getTip() {
@@ -57,7 +57,17 @@ public class Details {
     public String time;
     public String type;
     public String position;
-    public double money;
+    public double moneyD;
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String money;
     public String tip;
 
     public Details(String id, Date date, String type, String position, double money, String tip) {
@@ -66,7 +76,8 @@ public class Details {
         this.time = String.format("%tF%n", this.date);
         this.type = type;
         this.position = position;
-        this.money = money;
+        this.moneyD = money;
+        this.money = String.valueOf(moneyD);
         this.tip = tip;
     }
 
@@ -78,16 +89,17 @@ public class Details {
         time = String.format("%tF%n", this.date);
         this.type = type;
         this.position = position;
-        this.money = money;
+        this.moneyD = money;
+        this.money = String.valueOf(moneyD);
         this.tip = tip;
     }
 
     @Override
     public String toString() {
-        return id + "\t" + String.format("%tF%n", date) + "\t" + type + "\t" + position + "\t" + money + "\t" + tip;
+        return id + "," + String.format("%tF", date) + "," + type + "," + position + "," + moneyD + "," + tip;
     }
 
-    public String toFormatString() {
-        return "用户\t时间\t类型\t位置\t金额\t备注";
+    public static String toFormatString() {
+        return "用户,时间,类型,位置,金额,备注";
     }
 }

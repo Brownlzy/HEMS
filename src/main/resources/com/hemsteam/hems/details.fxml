@@ -46,17 +46,19 @@
                         </MenuButton>
                         <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="75.0" GridPane.columnIndex="2">
                             <children>
-                                <Button mnemonicParsing="false" text="增加" />
-                                <Button mnemonicParsing="false" text="返回">
+                                <Button mnemonicParsing="false" onAction="#onAddClick" text="增加"/>
+                                <Button mnemonicParsing="false" onAction="#onEnableEdit" text="返回">
                                     <HBox.margin>
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </Button>
                             </children>
                         </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1"/>
                     </children>
                 </GridPane>
-                <TableView fx:id="detailsTable" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onSort="#onTableSort" styleClass="table-view" stylesheets="@../../../css/details.css" GridPane.rowIndex="1">
+                <TableView fx:id="detailsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                           styleClass="table-view" stylesheets="@../../../css/details.css" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="timeColumn" prefWidth="90.0" text="时间" />
                         <TableColumn fx:id="moneyColumn" prefWidth="75.0" text="金额" />
