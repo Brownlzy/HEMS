@@ -23,9 +23,9 @@
                     </font>
 
                 </Label>
-                <TextField layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0" promptText="输入需要查询的月份" styleClass="text-field" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="22.0" />
+                <TextField layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0" promptText="输入需要查询的年份" styleClass="text-field" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="22.0" />
                 <Button id="search" layoutX="697.0" layoutY="22.0" mnemonicParsing="false" prefHeight="36" prefWidth="40.0" styleClass="button1" text="查询" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="22.0" />
-            <ChoiceBox layoutX="807.0" layoutY="26.0" prefWidth="150.0" />
+            <ComboBox editable="true" layoutX="761.0" layoutY="23.0" prefHeight="36.0" prefWidth="191.0" promptText="输入或选择需要查询的月份" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="23.0" />
             </children>
         </AnchorPane>
     </top>
