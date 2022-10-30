@@ -15,9 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -150,7 +152,7 @@ public class DetailsController implements Initializable {
                 new Details(
                         Account.getUser(),
                         new Date(),
-                        "双击修改",
+                        "其他",
                         "双击修改",
                         0,
                         "双击修改",

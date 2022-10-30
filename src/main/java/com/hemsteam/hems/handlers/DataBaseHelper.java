@@ -6,11 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Type;
 import java.sql.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class DataBaseHelper {
 
@@ -59,8 +57,8 @@ public class DataBaseHelper {
 
         //插入初始账户
         try {
-            ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
-            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"AllType","0");
+            ID_Insert("admin", "44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
+            SUMMARY_Insert("admin", getYearMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1), "AllType", "0");
         } catch (SQLException e) {
 
         }
@@ -366,17 +364,21 @@ public class DataBaseHelper {
 
     /**
      * 查找满足conditon条件的SUMMARY表的内容
+     *
      * @param condition
      * @throws SQLException
      */
-    public static String SUMMARY_Query(String condition) throws SQLException {
+    public static HashMap<String, Double> SUMMARY_Query(String condition) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM SUMMARY WHERE " + condition;
+            Log.d(DataBaseHelper.class, sql);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            HashMap<String, Double> typeMap = new HashMap<>();
             while (rs.next()) {
-                return rs.getString(4);
+                typeMap.put(rs.getString(3), Double.valueOf(rs.getString(4)));
             }
+            return typeMap;
         }
         return null;
     }
@@ -441,12 +443,40 @@ public class DataBaseHelper {
     }
 
     public boolean putDetails(Details details) {
+        List<Details> result = new ArrayList<>();
         try {
+            Data_Query("IN_TIME='" + details.inTime + "'", result);
+            Details detailsBefore = result.get(0);
+            HashMap<String, Double> formerTypeMap = getTypeMoneyMap(detailsBefore.getId(),
+                    detailsBefore.date.getYear() + 1900,
+                    detailsBefore.date.getMonth() + 1);
+            if (formerTypeMap.containsKey(detailsBefore.type))
+                SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                        detailsBefore.date.getMonth() + 1) + " and TYPE='" + detailsBefore.type + "'", "SUM=" + String.valueOf(formerTypeMap.get(detailsBefore.type) - detailsBefore.moneyD));
+            if (formerTypeMap.containsKey("AllType"))
+                SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                        detailsBefore.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(formerTypeMap.get("AllType") - detailsBefore.moneyD));
+
             Data_Update("IN_TIME='" + details.inTime + "'", "TYPE='" + details.type +
                     "', YEAR=" + (details.date.getYear() + 1900) + ", MONTH=" + (details.date.getMonth() + 1) +
                     ", DAY=" + details.date.getDate() + ", POSITION='" + details.position + "', MONEY='" + details.money +
                     "', TIP='" + details.tip + "'"
             );
+            HashMap<String, Double> laterTypeMap = getTypeMoneyMap(details.getId(),
+                    details.date.getYear() + 1900,
+                    details.date.getMonth() + 1);
+            if (laterTypeMap.containsKey("AllType")) {
+                SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
+                        details.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(laterTypeMap.get("AllType") + details.moneyD));
+            } else {
+                SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), "AllType", details.money);
+            }
+            if (laterTypeMap.containsKey(details.type)) {
+                SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
+                        details.date.getMonth() + 1) + " and TYPE='" + details.type + "'", "SUM=" + String.valueOf(laterTypeMap.get(details.type) + details.moneyD));
+            } else {
+                SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), details.type, details.money);
+            }
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -462,6 +492,18 @@ public class DataBaseHelper {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static int getYearMonth(int year, int month) {
+        return year * 100 + month;
+    }
+
+    public HashMap<String, Double> getTypeMoneyMap(String id, int year, int month) {
+        try {
+            return SUMMARY_Query("ID='" + id + "' and MONTH=" + DataBaseHelper.getYearMonth(year, month));
+        } catch (SQLException e) {
+            return null;
         }
     }
 }
