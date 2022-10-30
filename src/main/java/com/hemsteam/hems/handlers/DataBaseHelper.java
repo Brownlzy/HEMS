@@ -382,7 +382,6 @@ public class DataBaseHelper {
 
     public ObservableList<Details> getDetails() {
         ObservableList<Details> result = FXCollections.observableArrayList();
-        //TODO: 向result中add
         try {
             Data_Query("ID='" + Account.getUser() + "'", result);
         } catch (SQLException e) {
