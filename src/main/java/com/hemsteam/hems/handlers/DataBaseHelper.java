@@ -1,9 +1,13 @@
 package com.hemsteam.hems.handlers;
 
+import com.hemsteam.hems.datamodels.Details;
 import com.hemsteam.hems.utils.Log;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
+import java.util.List;
 
 public class DataBaseHelper {
 
@@ -315,25 +319,36 @@ public class DataBaseHelper {
     }
 
 
-
     /**
      * 查找Data表的内容
+     *
      * @param condition
      * @throws SQLException
      */
-    public static void Data_Query(String condition) throws SQLException {
+    public static void Data_Query(String condition, List<Details> data) throws SQLException {
         if (conn != null) {
             String sql = "SELECT * FROM Data WHERE " + condition;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
+                data.add(
+                        new Details(rs.getString(1),
+                                rs.getInt(3),
+                                rs.getInt(4),
+                                rs.getInt(5),
+                                rs.getString(2),
+                                rs.getString(6),
+                                Double.parseDouble(rs.getString(7)),
+                                rs.getString(8)
+                        )
+                );
                 System.out.print("id：" + rs.getString(1) + " ");
                 System.out.print("type：" + rs.getString(2) + " ");
                 System.out.print("year：" + rs.getInt(3) + " ");
                 System.out.print("month：" + rs.getInt(4) + " ");
                 System.out.print("day：" + rs.getInt(5) + " ");
                 System.out.print("position：" + rs.getString(6) + " ");
-                System.out.println("money：" + rs.getString(7)+" ");
+                System.out.println("money：" + rs.getString(7) + " ");
                 System.out.println("tip:" + rs.getString(8));
             }
         }
@@ -358,7 +373,43 @@ public class DataBaseHelper {
         return null;
     }
 
-    public boolean changePassword(String user, String sha256StrJava) {
+    public boolean changePassword(String user, String passwordHash) {
+        //TODO
         return true;
+    }
+
+    public ObservableList<Details> getDetails() {
+        ObservableList<Details> result = FXCollections.observableArrayList();
+        //TODO: 向result中add
+        try {
+            Data_Query("ID='" + Account.getUser() + "'", result);
+        } catch (SQLException e) {
+            return FXCollections.observableArrayList();
+        }
+        return result;
+    }
+
+    public ObservableList<Details> getDetailsByType(String type) {
+        ObservableList<Details> result = FXCollections.observableArrayList();
+        //TODO: 向result中add
+        return result;
+    }
+
+    public ObservableList<Details> getDetailsByYear(int year) {
+        ObservableList<Details> result = FXCollections.observableArrayList();
+        //TODO: 向result中add
+        return result;
+    }
+
+    public ObservableList<Details> getDetailsByMonth(int year, int month) {
+        ObservableList<Details> result = FXCollections.observableArrayList();
+        //TODO: 向result中add
+        return result;
+    }
+
+    public ObservableList<Details> getDetailsByDay(int year, int month, int day) {
+        ObservableList<Details> result = FXCollections.observableArrayList();
+        //TODO: 向result中add
+        return result;
     }
 }

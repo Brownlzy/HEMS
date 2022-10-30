@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <fx:root prefHeight="483.0" prefWidth="679.0" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0"
          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
-         xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="com.hemsteam.hems.controllers.DetailsController">
     <top>
         <AnchorPane prefHeight="38.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -26,8 +28,9 @@
                 <GridPane>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="381.0"/>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="0.0"
+                                           prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -39,21 +42,27 @@
                                 <MenuItem mnemonicParsing="false" text="Action 2"/>
                             </items>
                         </MenuButton>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="6.0" prefWidth="226.0" GridPane.columnIndex="2">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="75.0" GridPane.columnIndex="2">
                             <children>
                                 <Button mnemonicParsing="false" text="增加"/>
-                                <Button mnemonicParsing="false" text="返回"/>
+                                <Button mnemonicParsing="false" text="返回">
+                                    <HBox.margin>
+                                        <Insets left="10.0"/>
+                                    </HBox.margin>
+                                </Button>
                             </children>
                         </HBox>
                     </children>
                 </GridPane>
-                <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+                <TableView fx:id="detailsTable" editable="true" maxHeight="1.7976931348623157E308"
+                           maxWidth="1.7976931348623157E308" onSort="#onTableSort" GridPane.rowIndex="1">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="时间"/>
-                        <TableColumn prefWidth="75.0" text="金额"/>
-                        <TableColumn prefWidth="75.0" text="地点"/>
-                        <TableColumn prefWidth="163.0" text="类型"/>
-                        <TableColumn prefWidth="133.0" text="操作">
+                        <TableColumn fx:id="timeColumn" prefWidth="75.0" text="时间"/>
+                        <TableColumn fx:id="moneyColumn" prefWidth="75.0" text="金额"/>
+                        <TableColumn fx:id="positionColumn" prefWidth="75.0" text="地点"/>
+                        <TableColumn fx:id="typeColumn" prefWidth="107.0" text="类型"/>
+                        <TableColumn fx:id="tipColumn" minWidth="-1.0" prefWidth="181.0" text="备注"/>
+                        <TableColumn prefWidth="150.0" text="操作">
                             <columns>
                                 <TableColumn prefWidth="70.0" text="编辑"/>
                                 <TableColumn text="删除"/>
