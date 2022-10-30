@@ -59,6 +59,17 @@ public class Account {
         return RESIGSTER_SUCCESSFUL;
     }
 
+    public boolean changPassword(String pw, String npw1, String npw2) {
+        if (login(getUser(), pw) == LOGIN_SUCCESSFUL) {
+            if (!isPasswordValid(pw)) return false;
+            if (!npw1.equals(npw2)) return false;
+            if (!DataBaseHelper.getInstance().changePassword(getUser(), SHA256.getSHA256StrJava("HEMS" + npw1)))
+                return false;
+            return true;
+        } else
+            return false;
+    }
+
     private boolean isUsernameValid(String name) {
         return name.length() >= 4;
     }

@@ -358,4 +358,7 @@ public class DataBaseHelper {
         return null;
     }
 
+    public boolean changePassword(String user, String sha256StrJava) {
+        return true;
+    }
 }
