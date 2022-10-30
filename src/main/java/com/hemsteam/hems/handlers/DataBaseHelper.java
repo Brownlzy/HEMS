@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DataBaseHelper {
@@ -21,7 +23,8 @@ public class DataBaseHelper {
     static Statement stmt;
 
     private static DataBaseHelper dataBaseHelper;
-
+    Date date = new Date();
+    Calendar calendar = Calendar.getInstance();
     private DataBaseHelper(){
         //TODO: init
         //创建数据库
@@ -56,7 +59,7 @@ public class DataBaseHelper {
         //插入初始账户
         try {
             ID_Insert("admin","44a096ad3826989684abd961f3c8f6cee31f9e80d2a93cbbc01e91a1d493cee0");
-            SUMMARY_Insert("admin","1","0");
+            SUMMARY_Insert("admin",calendar.get(Calendar.MONTH)+1,"0");
         } catch (SQLException e) {
 
         }
@@ -96,6 +99,7 @@ public class DataBaseHelper {
 //        }
         try {
             ID_Insert(username,passwordHash);
+            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"0");
             return true;
         } catch (SQLException e) {
             return false;
@@ -131,11 +135,11 @@ public class DataBaseHelper {
      */
     public void CreateTable_Data() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS Data"
-                + "(ID vchar(16) PRIMARY KEY,"
+                + "(ID vchar(16),"
                 + "TYPE vchar(10),"
-                + "YEAR vchar(4),"
-                + "MONTH vchar(2),"
-                + "DAY vchar(2),"
+                + "YEAR int(4),"
+                + "MONTH int(2),"
+                + "DAY int(2),"
                 + "POSITION vchar(20),"
                 + "MONEY vchar(20),"
                 + "TIP vchar(100))";
@@ -148,7 +152,7 @@ public class DataBaseHelper {
     public void CreateTable_SUMMARY() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
                 + "(ID vchar(16) PRIMARY KEY,"
-                + "MONTH vchar(16),"
+                + "MONTH int(16),"
                 + "SUM vchar(16))";
         stmt.executeUpdate(sql);
     }
@@ -182,15 +186,15 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,String year,String month,String day,String position,String money,String tip) throws SQLException {
+    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
             pstmt.setString(2,type);
-            pstmt.setString(3,year);
-            pstmt.setString(4,month);
-            pstmt.setString(5,day);
+            pstmt.setInt(3,year);
+            pstmt.setInt(4,month);
+            pstmt.setInt(5,day);
             pstmt.setString(6,position);
             pstmt.setString(7,money);
             pstmt.setString(8,tip);
@@ -205,12 +209,12 @@ public class DataBaseHelper {
      * @param sum
      * @throws SQLException
      */
-    public static void SUMMARY_Insert(String id,String month,String sum) throws SQLException {
+    public static void SUMMARY_Insert(String id,int month,String sum) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO SUMMARY VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id);
-            pstmt.setString(2,month);
+            pstmt.setInt(2,month);
             pstmt.setString(3,sum);
             pstmt.executeUpdate();
         }
@@ -342,14 +346,14 @@ public class DataBaseHelper {
                                 rs.getString(8)
                         )
                 );
-                System.out.print("id：" + rs.getString(1) + " ");
-                System.out.print("type：" + rs.getString(2) + " ");
-                System.out.print("year：" + rs.getInt(3) + " ");
-                System.out.print("month：" + rs.getInt(4) + " ");
-                System.out.print("day：" + rs.getInt(5) + " ");
-                System.out.print("position：" + rs.getString(6) + " ");
-                System.out.println("money：" + rs.getString(7) + " ");
-                System.out.println("tip:" + rs.getString(8));
+//                System.out.print("id：" + rs.getString(1) + " ");
+//                System.out.print("type：" + rs.getString(2) + " ");
+//                System.out.print("year：" + rs.getInt(3) + " ");
+//                System.out.print("month：" + rs.getInt(4) + " ");
+//                System.out.print("day：" + rs.getInt(5) + " ");
+//                System.out.print("position：" + rs.getString(6) + " ");
+//                System.out.println("money：" + rs.getString(7) + " ");
+//                System.out.println("tip:" + rs.getString(8));
             }
         }
     }
@@ -365,8 +369,6 @@ public class DataBaseHelper {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-//                System.out.print("id：" + rs.getString(1) + " ");
-//                System.out.print("password：" + rs.getString(2) + " ");
                 return rs.getString(3);
             }
         }
@@ -392,6 +394,7 @@ public class DataBaseHelper {
     public ObservableList<Details> getDetailsByType(String type) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
+
         return result;
     }
 
