@@ -394,25 +394,44 @@ public class DataBaseHelper {
     public ObservableList<Details> getDetailsByType(String type) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
-
+        try {
+            Data_Query("ID='" + Account.getUser() + "' and TYPE='" + type + "'", result);
+        } catch (SQLException e) {
+            return FXCollections.observableArrayList();
+        }
         return result;
     }
 
     public ObservableList<Details> getDetailsByYear(int year) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
+        try {
+            Data_Query("ID='" + Account.getUser() + "' and YEAR='" + year + "'", result);
+        } catch (SQLException e) {
+            return FXCollections.observableArrayList();
+        }
         return result;
     }
 
     public ObservableList<Details> getDetailsByMonth(int year, int month) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
+        try {
+            Data_Query("ID='" + Account.getUser() + "' and YEAR='" + year + "' and MONTH='" + month + "'", result);
+        } catch (SQLException e) {
+            return FXCollections.observableArrayList();
+        }
         return result;
     }
 
     public ObservableList<Details> getDetailsByDay(int year, int month, int day) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
+        try {
+            Data_Query("ID='" + Account.getUser() + "' and YEAR='" + year + "' and MONTH='" + month + "' and DAY='" + day + "'", result);
+        } catch (SQLException e) {
+            return FXCollections.observableArrayList();
+        }
         return result;
     }
 }
