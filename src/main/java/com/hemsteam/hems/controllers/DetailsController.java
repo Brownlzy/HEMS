@@ -62,6 +62,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setTime(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -73,6 +76,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setType(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -85,6 +91,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setPosition(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -96,6 +105,9 @@ public class DetailsController implements Initializable {
                         ((Details) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setTip(t.getNewValue());
+                        saveData(((Details) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ));
                     }
                 }
         );
@@ -109,6 +121,9 @@ public class DetailsController implements Initializable {
                             ((Details) t.getTableView().getItems().get(
                                     t.getTablePosition().getRow())
                             ).setMoney(t.getNewValue());
+                            saveData(((Details) t.getTableView().getItems().get(
+                                    t.getTablePosition().getRow())
+                            ));
                         } catch (Exception ignored) {
 
                         }
@@ -121,7 +136,7 @@ public class DetailsController implements Initializable {
 
     @FXML
     protected void onAddClick() {
-        data.add(
+        Details details =
                 new Details(
                         Account.getUser(),
                         new Date(),
@@ -129,12 +144,13 @@ public class DetailsController implements Initializable {
                         "双击修改",
                         0,
                         "双击修改",
-                        String.valueOf(new Date().getTime()))
-        );
+                        String.valueOf(new Date().getTime()));
+        data.add(details);
+        DataBaseHelper.getInstance().addDetails(details);
         onEnableEdit();
     }
 
-    protected void saveData() {
-        DataBaseHelper.getInstance().putDetails(data);
+    protected void saveData(Details details) {
+        DataBaseHelper.getInstance().putDetails(details);
     }
 }

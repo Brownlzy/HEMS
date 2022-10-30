@@ -17,7 +17,15 @@ public class Details {
     }
 
     public void setTime(String time) {
-        this.time = time;
+        try {
+            date = new Date(Integer.parseInt(time.split("-")[0]),
+                    Integer.parseInt(time.split("-")[1]) - 1,
+                    Integer.parseInt(time.split("-")[2])
+            );
+            this.time = String.format("%tF%n", this.date);
+            ;
+        } catch (Exception ignored) {
+        }
     }
 
     public String getType() {
@@ -66,7 +74,12 @@ public class Details {
     }
 
     public void setMoney(String money) {
-        this.money = money;
+        try {
+            moneyD = Double.parseDouble(money);
+            this.money = money;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String money;

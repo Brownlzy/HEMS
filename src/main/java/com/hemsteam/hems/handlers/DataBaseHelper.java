@@ -437,8 +437,28 @@ public class DataBaseHelper {
         return result;
     }
 
-    public boolean putDetails(List<Details> list) {
+    public boolean putDetails(Details details) {
+        try {
+            Data_Update("IN_TIME='" + details.inTime + "'", "TYPE='" + details.type +
+                    "', YEAR=" + (details.date.getYear() + 1900) + ", MONTH=" + (details.date.getMonth() + 1) +
+                    ", DAY=" + details.date.getDate() + ", POSITION='" + details.position + "', MONEY='" + details.money +
+                    "', TIP='" + details.tip + "'"
+            );
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-        return false;
+    public boolean addDetails(Details details) {
+        try {
+            Data_Insert(details.id, details.type, details.date.getYear() + 1900, details.date.getMonth() + 1, details.date.getDate(),
+                    details.position, details.money, details.tip, details.inTime);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
