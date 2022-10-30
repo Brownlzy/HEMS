@@ -84,10 +84,10 @@ public class Details {
 
     @Override
     public String toString() {
-        return id + "\t" + String.format("%tF%n", date) + "\t" + type + "\t" + position + "\t" + money + "\t" + tip;
+        return id + "," + String.format("%tF%n", date) + "," + type + "," + position + "," + money + "," + tip;
     }
 
-    public String toFormatString() {
-        return "用户\t时间\t类型\t位置\t金额\t备注";
+    public static String toFormatString() {
+        return "用户,时间,类型,位置,金额,备注";
     }
 }
