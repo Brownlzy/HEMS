@@ -38,27 +38,26 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <MenuButton mnemonicParsing="false" text="排序方式">
+                        <MenuButton id="sort" mnemonicParsing="false" text="排序方式">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                                <MenuItem mnemonicParsing="false" text="Action 2" />
+                                <MenuItem mnemonicParsing="false" text="时间" />
+                                <MenuItem mnemonicParsing="false" text="类型" />
                             </items>
                         </MenuButton>
                         <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="75.0" GridPane.columnIndex="2">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#onAddClick" text="增加"/>
-                                <Button mnemonicParsing="false" onAction="#onEnableEdit" text="返回">
+                                <Button id="add" mnemonicParsing="false" onAction="#onAddClick" text="增加" />
+                                <Button id="return" mnemonicParsing="false" onAction="#onEnableEdit" text="返回">
                                     <HBox.margin>
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </Button>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1"/>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
-                <TableView fx:id="detailsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="table-view" stylesheets="@../../../css/details.css" GridPane.rowIndex="1">
+                <TableView fx:id="detailsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="table-view" stylesheets="@../../../css/details.css" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="timeColumn" prefWidth="90.0" text="时间" />
                         <TableColumn fx:id="moneyColumn" prefWidth="75.0" text="金额" />
