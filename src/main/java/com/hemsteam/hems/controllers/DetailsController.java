@@ -3,21 +3,29 @@ package com.hemsteam.hems.controllers;
 import com.hemsteam.hems.datamodels.Details;
 import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.handlers.DataBaseHelper;
+import com.hemsteam.hems.utils.Log;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.io.*;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DetailsController implements Initializable {
     private ObservableList<Details> data;
+    @FXML
+    private Button export;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +52,8 @@ public class DetailsController implements Initializable {
     public TableColumn typeColumn;
     @FXML
     public TableColumn tipColumn;
+    @FXML
+    private Label tips;
 
     @FXML
     void onEnableEdit() {
@@ -125,5 +135,40 @@ public class DetailsController implements Initializable {
                 new Details(Account.getUser(), new Date(), "双击修改", "双击修改", 0, "双击修改")
         );
         onEnableEdit();
+    }
+    @FXML
+    void onExportClick() {
+        try {
+            FileOutputStream fos;
+            OutputStreamWriter osw;
+            BufferedWriter out;
+            String title= "detail"+new Date().getTime()+".csv";
+            Log.d(this.getClass(),title);
+            fos = new FileOutputStream(title);
+            osw = new OutputStreamWriter(fos, "UTF-8");
+            out = new BufferedWriter(osw);
+            //追加BOM标识
+            fos.write(0xef);
+            fos.write(0xbb);
+            fos.write(0xbf);
+            out.write(Details.toFormatString());
+            out.newLine();
+            for (Details d :
+                    data) {
+                out.write(d.toString());
+                out.newLine();
+            }
+            //关闭流
+            out.flush();
+            osw.flush();
+            fos.flush();
+            out.close();
+            osw.close();
+            fos.close();
+            tips.setText(title+"文件保存成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+            tips.setText("文件保存失败");
+        }
     }
 }
