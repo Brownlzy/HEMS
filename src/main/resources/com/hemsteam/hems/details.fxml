@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="483.0" prefWidth="898.0" stylesheets="@../../../css/details.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.DetailsController">
+<fx:root prefHeight="483.0" prefWidth="987.0" stylesheets="@../../../css/details.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.DetailsController">
     <top>
         <AnchorPane prefHeight="61.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
             <children>
@@ -34,7 +34,6 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="623.0" />
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="0.0" prefWidth="164.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="4.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -60,7 +59,7 @@
                            <children>
                                       <Button id="export" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onExportClick" styleClass="button1" text="导出" GridPane.columnIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="5.0" right="5.0" />
+                                    <Insets left="5.0" right="12.0" />
                                  </GridPane.margin></Button>
                                       <Button id="delete" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeleteClick" prefHeight="23.0" prefWidth="53.0" styleClass="button1" text="删除" GridPane.columnIndex="1">
                                  <GridPane.margin>

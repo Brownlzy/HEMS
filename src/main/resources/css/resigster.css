@@ -13,3 +13,10 @@
 
 }
 .button:hover {    -fx-background-color: linear-gradient(#0081ff, #1cbbb4);}
+
+.background {
+       -fx-background-color: white;
+}
+.ImageView{
+       -fx-alignment: center;
+}
