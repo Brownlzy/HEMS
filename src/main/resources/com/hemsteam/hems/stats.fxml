@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<fx:root prefHeight="413.0" prefWidth="657.0" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.OverviewController">
+<fx:root prefHeight="413.0" prefWidth="657.0" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.StatsController">
    <top>
       <AnchorPane prefHeight="61.0" prefWidth="598.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,14 +18,14 @@
                </font>
             </Label>
             <TextField layoutX="355.0" layoutY="17.0" promptText="输入要查询的月份" />
-            <Button layoutX="557.0" layoutY="17.0" mnemonicParsing="false" text="查询" />
+            <Button layoutX="557.0" layoutY="17.0" mnemonicParsing="false" onAction="#onInquireClick" text="查询" />
          </children>
       </AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <BarChart layoutX="79.0" title="不同类型支出的柱状图">
+            <BarChart fx:id="barchart" layoutX="79.0" title="不同类型支出的柱状图">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
