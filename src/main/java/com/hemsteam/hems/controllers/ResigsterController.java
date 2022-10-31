@@ -9,7 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -25,6 +28,8 @@ public class ResigsterController implements Initializable {
     private PasswordField passWord;
     @FXML
     private PasswordField passWordRepeat;
+    @FXML
+    private ImageView Image1;
 
     public ResigsterController() {
     }
@@ -68,7 +73,12 @@ public class ResigsterController implements Initializable {
         this.hems = hems;
     }
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        File file = new File("src/main/resources/draw/cover.png");
+        String string = file.toURI().toString();
+        Image image = new Image(string);
+        Image1.setImage(image);
+    }
 
     /**
      * 返回 用户名
