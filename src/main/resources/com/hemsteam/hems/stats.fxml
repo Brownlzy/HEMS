@@ -31,10 +31,11 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <TableView layoutX="418.0" prefHeight="399.0" prefWidth="240.0">
+            <TableView fx:id="table" layoutX="418.0" prefHeight="378.0" prefWidth="240.0">
               <columns>
-                <TableColumn fx:id="type" prefWidth="120.0" text="类型" />
-                <TableColumn fx:id="percent" prefWidth="121.0" text="所占百分比" />
+                <TableColumn fx:id="typeColumn" text="类型" />
+                <TableColumn fx:id="moneyColumn" text="金额" />
+                  <TableColumn fx:id="percentColumn" text="所占百分比" />
               </columns>
             </TableView>
          </children>

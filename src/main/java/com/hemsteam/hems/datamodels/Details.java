@@ -69,7 +69,9 @@ public class Details {
     public String id;
     public Date date;
     public String time;
+
     public String type;
+
     public String position;
     public double moneyD;
     public String inTime;
