@@ -1,5 +1,27 @@
+.sub-btn {
+    -fx-pref-height: 35px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+.sub-btn:hover{
+    -fx-background-color: rgba(176, 218, 232, 0.85);
+    -fx-text-fill: #fff;
+}
 
-
+.titled-pane > .title {
+    -fx-background-color: white;
+    -fx-padding: 20 10 20 10;
+    -fx-border-radius: 8px 8px 8px 8px;
+    -fx-alignment: center;
+}
+.titled-pane{
+    -fx-background-color: rgba(128, 128, 128, 0.47);
+    -fx-border-color: white;
+}
+.titled-pane >.title:hover{
+    -fx-background-color: rgba(176, 218, 232, 0.85);
+    -fx-text-fill: #fff;
+}
 .text-field1 {
     -fx-alignment: left;
     -fx-border-color: rgba(176, 218, 232, 0.85);
@@ -17,6 +39,7 @@
     -fx-font-family: 仿宋;
     -fx-background-color: rgba(238, 214, 214, 0.15);
 }
+
 .button1 {
     -fx-background-color: rgba(176, 218, 232, 0.85);
     -fx-border-radius: 0 8px 8px 0;
