@@ -44,6 +44,8 @@ public class DetailsController implements Initializable {
     @FXML
     private TableView<Details> detailsTable;
 
+
+
     @FXML
     public TableColumn timeColumn;
     @FXML

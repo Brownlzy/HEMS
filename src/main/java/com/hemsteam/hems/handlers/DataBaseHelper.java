@@ -1,6 +1,7 @@
 package com.hemsteam.hems.handlers;
 
 import com.hemsteam.hems.datamodels.Details;
+import com.hemsteam.hems.datamodels.Stats;
 import com.hemsteam.hems.utils.Log;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -373,6 +374,8 @@ public class DataBaseHelper {
         }
     }
 
+
+
     /**
      * 查找满足conditon条件的SUMMARY表的内容
      *
@@ -393,6 +396,8 @@ public class DataBaseHelper {
         }
         return null;
     }
+
+
 
     public boolean changePassword(String user, String passwordHash) {
         try {
@@ -446,6 +451,8 @@ public class DataBaseHelper {
         }
         return result;
     }
+
+
 
     public ObservableList<Details> getDetailsByDay(int year, int month, int day) {
         ObservableList<Details> result = FXCollections.observableArrayList();

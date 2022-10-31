@@ -2,6 +2,7 @@ package com.hemsteam.hems.controllers;
 
 import com.hemsteam.hems.HEMS;
 import com.hemsteam.hems.handlers.Account;
+import com.hemsteam.hems.handlers.DataBaseHelper;
 import com.hemsteam.hems.utils.Log;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
