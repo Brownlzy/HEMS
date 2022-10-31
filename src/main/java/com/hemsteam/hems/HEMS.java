@@ -4,7 +4,7 @@ package com.hemsteam.hems;
 import com.hemsteam.hems.controllers.LoginController;
 import com.hemsteam.hems.controllers.MainController;
 import com.hemsteam.hems.controllers.ResigsterController;
-import com.hemsteam.hems.controllers.OverviewController;
+import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.utils.Log;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +61,7 @@ public class HEMS extends Application {
 //            fxmlLoader.setController(this);
 
             stage.setTitle("家庭支出管理系统");
+            Account.setPage(innerFxml);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.d(this.getClass(), "主页面跳转异常！");

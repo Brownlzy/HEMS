@@ -20,6 +20,16 @@ public class Account {
     private static int year;
     private static int month;
 
+    public static String getPage() {
+        return page;
+    }
+
+    public static void setPage(String page) {
+        Account.page = page;
+    }
+
+    private static String page;
+
     public static void setYearMonth(int y, int m) {
         year = y;
         month = m;
