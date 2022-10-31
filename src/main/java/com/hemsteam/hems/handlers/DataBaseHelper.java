@@ -506,4 +506,14 @@ public class DataBaseHelper {
             return null;
         }
     }
+
+    public void delDetails(Details d) {
+        try {
+            d.setMoney("0");
+            putDetails(d);
+            Data_Delete("IN_TIME='" + d.inTime + "'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

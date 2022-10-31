@@ -5,15 +5,15 @@ import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.handlers.DataBaseHelper;
 import com.hemsteam.hems.utils.Log;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -55,6 +55,8 @@ public class DetailsController implements Initializable {
     @FXML
     public TableColumn tipColumn;
     @FXML
+    public TableColumn delete;
+    @FXML
     private Label tips;
 
     @FXML
@@ -65,6 +67,7 @@ public class DetailsController implements Initializable {
         positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("type"));
         tipColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("tip"));
+        delete.setCellValueFactory(new PropertyValueFactory<Details, Boolean>("delete"));
 
         timeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         timeColumn.setOnEditCommit(
@@ -142,8 +145,56 @@ public class DetailsController implements Initializable {
                     }
                 }
         );
+
+        delete.setCellFactory(new Callback<TableColumn<Details, Boolean>, TableCell<Details, Boolean>>() {
+
+            @Override
+
+            public TableCell<Details, Boolean> call(TableColumn<Details, Boolean> p) {
+
+                return new TableCell<Details, Boolean>() {
+
+                    final CheckBox cell = new CheckBox();
+
+                    {
+                        setAlignment(Pos.CENTER);
+                    }
+
+                    {
+                        cell.setOnAction(
+
+                                new EventHandler<ActionEvent>() {
+                                    @Override
+
+                                    public void handle(ActionEvent t) {
+
+                                        Details vo = getTableView().getItems().get(getIndex());
+
+                                        vo.delete = cell.isSelected();
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void updateItem(Boolean item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            Details vo = getTableView().getItems().get(getIndex());
+                            if (!vo.delete) {
+                                cell.setSelected(false);
+                            } else {
+                                cell.setSelected(true);
+                            }
+                        } else {
+                            cell.setVisible(false);
+                        }
+                        setGraphic(cell);
+                    }
+                };
+            }
+        });
         detailsTable.setItems(data);
-        //detailsTable.getColumns().addAll(timeColumn, moneyColumn, typeColumn);
+
     }
 
     @FXML
@@ -162,6 +213,16 @@ public class DetailsController implements Initializable {
         onEnableEdit();
     }
 
+    @FXML
+    void onDeleteClick() {
+        for (Details datum : data) {
+            if (datum.delete)
+                DataBaseHelper.getInstance().delDetails(datum);
+        }
+        data.removeIf(t -> t.delete);
+        onEnableEdit();
+    }
+
     protected void saveData(Details details) {
         DataBaseHelper.getInstance().putDetails(details);
     }
@@ -172,8 +233,8 @@ public class DetailsController implements Initializable {
             FileOutputStream fos;
             OutputStreamWriter osw;
             BufferedWriter out;
-            String title= "detail"+new Date().getTime()+".csv";
-            Log.d(this.getClass(),title);
+            String title = "detail" + new Date().getTime() + ".csv";
+            Log.d(this.getClass(), title);
             fos = new FileOutputStream(title);
             osw = new OutputStreamWriter(fos, "UTF-8");
             out = new BufferedWriter(osw);
@@ -195,10 +256,11 @@ public class DetailsController implements Initializable {
             out.close();
             osw.close();
             fos.close();
-            tips.setText(title+"文件保存成功");
+            tips.setText(title + "文件保存成功");
         } catch (IOException e) {
             e.printStackTrace();
             tips.setText("文件保存失败");
         }
     }
+
 }

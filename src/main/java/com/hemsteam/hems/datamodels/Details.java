@@ -66,8 +66,17 @@ public class Details {
     public String type;
     public String position;
     public double moneyD;
-
     public String inTime;
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
+    }
+
+    public boolean delete;
 
     public String getMoney() {
         return money;
