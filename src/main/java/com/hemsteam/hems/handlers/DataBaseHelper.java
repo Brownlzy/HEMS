@@ -4,6 +4,7 @@ import com.hemsteam.hems.datamodels.Details;
 import com.hemsteam.hems.utils.Log;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;

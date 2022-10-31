@@ -1,5 +1,11 @@
 package com.hemsteam.hems.datamodels;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.CheckBox;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -78,9 +84,19 @@ public class Details {
 
     public boolean delete;
 
+//    private boolean delete ;
     public String getMoney() {
         return money;
     }
+
+
+//    public void setDelete(boolean newValue){
+//        this.delete=newValue;
+//    }
+//    public boolean getDelete(){
+//        return this.delete;
+//    }
+
 
     public void setMoney(String money) {
         try {
@@ -90,7 +106,6 @@ public class Details {
             e.printStackTrace();
         }
     }
-
     public String money;
     public String tip;
 
