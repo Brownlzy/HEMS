@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="988.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.MainController">
     <top>
         <AnchorPane prefHeight="80.0">
             <children>
                 <Label text="家庭支出管理系统" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
                     <effect>
-                        <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0"/>
+                        <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0" />
                     </effect>
                     <font>
-                        <Font name="System Bold" size="26.0"/>
+                        <Font name="System Bold" size="26.0" />
                     </font>
 
                 </Label>
-                <TextField fx:id="year" layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0"
-                           promptText="输入需要查询的年份" styleClass="text-field1" AnchorPane.rightAnchor="239.0"
-                           AnchorPane.topAnchor="22.0"/>
+                <TextField fx:id="year" layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0" promptText="输入需要查询的年份" styleClass="text-field1" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="22.0" />
                 <!--                <Button id="search" layoutX="697.0" layoutY="22.0" mnemonicParsing="false" prefHeight="36" prefWidth="40.0" styleClass="button1" text="查询" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="22.0" />-->
-                <TextField fx:id="month" layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0"
-                           promptText="输入需要查询的月份" styleClass="text-field2" AnchorPane.rightAnchor="66.0"
-                           AnchorPane.topAnchor="22.0"/>
-                <Button id="search" fx:id="query" defaultButton="true" layoutX="697.0" layoutY="22.0"
-                        mnemonicParsing="false" onAction="#onQueryClick" prefHeight="36" prefWidth="40.0"
-                        styleClass="button1" text="查询" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="22.0"/>
+                <TextField fx:id="month" layoutX="522.0" layoutY="22.0" prefHeight="37.0" prefWidth="175.0" promptText="输入需要查询的月份" styleClass="text-field2" AnchorPane.rightAnchor="66.0" AnchorPane.topAnchor="22.0" />
+                <Button id="search" fx:id="query" defaultButton="true" layoutX="697.0" layoutY="22.0" mnemonicParsing="false" onAction="#onQueryClick" prefHeight="36" prefWidth="40.0" styleClass="button1" text="查询" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="22.0" />
             </children>
         </AnchorPane>
     </top>
@@ -37,22 +36,20 @@
                 <AnchorPane maxWidth="200.0" minWidth="200" prefHeight="597.0" prefWidth="200.0" styleClass="dark-theme">
                     <children>
                         <Button fx:id="overview" layoutY="-1.0" mnemonicParsing="false" onAction="#onOverviewClick" prefHeight="55.0" prefWidth="201.0" styleClass="button2" text="总览" />
-                        <TitledPane animated="false" layoutX="-1.0" layoutY="165.0" text="设置">
+                        <TitledPane animated="false" layoutX="-1.0" layoutY="165.0" text="设置" textAlignment="CENTER">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="user" layoutX="76.0" mnemonicParsing="false" onAction="#onUserClick" prefHeight="37.0" prefWidth="124.0" styleClass="button2" text="个人信息" />
-                                        <Button fx:id="help" layoutX="76.0" layoutY="37.0" mnemonicParsing="false" onAction="#onHelpClick" prefHeight="37.0" prefWidth="124.0" styleClass="button2" text="帮助" />
-                                        <Button fx:id="exit1" layoutX="76.0" layoutY="72.0" mnemonicParsing="false" onAction="#onExitClick" prefHeight="37.0" prefWidth="124.0" styleClass="button2" text="退出系统" />
+                                        <Button fx:id="user" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUserClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="个人信息" />
+                                        <Button fx:id="help" layoutX="18.0" layoutY="62.0" mnemonicParsing="false" onAction="#onHelpClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="帮助" />
+                                        <Button fx:id="exit1" layoutX="18.0" layoutY="110.0" mnemonicParsing="false" onAction="#onExitClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="退出系统" />
                               <VBox prefHeight="110.0" prefWidth="74.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </TitledPane>
                         <Button fx:id="details" layoutY="111.0" mnemonicParsing="false" onAction="#onDetailsClick" prefHeight="56.0" prefWidth="201.0" styleClass="button2" text="明细" />
-                        <Button fx:id="stats" layoutX="1.0" layoutY="55.0" mnemonicParsing="false"
-                                onAction="#onStatsClick" prefHeight="56.0" prefWidth="201.0" styleClass="button2"
-                                text="统计"/>
+                        <Button fx:id="stats" layoutX="1.0" layoutY="55.0" mnemonicParsing="false" onAction="#onStatsClick" prefHeight="56.0" prefWidth="201.0" styleClass="button2" text="统计" />
                     </children>
                 </AnchorPane>
                 <AnchorPane>
