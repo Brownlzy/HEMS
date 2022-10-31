@@ -63,6 +63,7 @@ public class MainController implements Initializable {
 
     @FXML
     void onStatsClick(ActionEvent event) {
+        hems.gotoMain("stats.fxml");
 
     }
 
