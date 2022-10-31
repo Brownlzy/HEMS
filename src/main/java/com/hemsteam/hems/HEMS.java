@@ -47,6 +47,7 @@ public class HEMS extends Application {
             LoginController login = (LoginController) replaceSceneContent("login.fxml", 680, 353);
             login.setApp(this);
             stage.setTitle("登录");
+            stage.setResizable(false);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.d(this.getClass(), "登录页面跳转异常！");
@@ -59,6 +60,7 @@ public class HEMS extends Application {
      */
     public void gotoMain(String innerFxml) {
         try {
+            stage.setResizable(true);
             double height=800;
             double width=1200;
             //监听最大化按钮是否被点击
