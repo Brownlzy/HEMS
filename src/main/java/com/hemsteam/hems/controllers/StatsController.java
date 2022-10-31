@@ -31,11 +31,12 @@ public class StatsController implements Initializable {
     private TableColumn percentColumn;
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        xAxis.setLabel("种类");
-        yAxis.setLabel("金额");
+        xAxis.setLabel("type");
+        yAxis.setLabel("money");
         HashMap<String,Double>originData;
         originData=DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
         XYChart.Series series = new XYChart.Series();
+        series.setName("金额");
         for (String key:
                 originData.keySet()) {
             if(!key.equals("AllType"))
