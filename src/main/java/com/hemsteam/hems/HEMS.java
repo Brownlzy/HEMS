@@ -7,12 +7,17 @@ import com.hemsteam.hems.controllers.ResigsterController;
 import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.utils.Log;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +27,7 @@ import java.sql.SQLException;
 
 public class HEMS extends Application {
     private Stage stage;
+    boolean max = false;
 
 
     @Override
@@ -41,6 +47,7 @@ public class HEMS extends Application {
             LoginController login = (LoginController) replaceSceneContent("login.fxml", 680, 353);
             login.setApp(this);
             stage.setTitle("登录");
+            stage.setResizable(false);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.d(this.getClass(), "登录页面跳转异常！");
@@ -53,13 +60,28 @@ public class HEMS extends Application {
      */
     public void gotoMain(String innerFxml) {
         try {
-            MainController main = (MainController) replaceMainSceneContent(innerFxml, 1200, 800);
+            stage.setResizable(true);
+            double height=800;
+            double width=1200;
+            //监听最大化按钮是否被点击
+            stage.maximizedProperty().addListener((ov, t, t1) -> {
+                Log.d(getClass(),"最大化被点击");
+                max=t1;
+            });
+            if(!innerFxml.equals("default")) {
+                if (max) {
+                    height = Screen.getPrimary().getBounds().getHeight();
+                    width = Screen.getPrimary().getBounds().getWidth();
+                } else {
+                    height = stage.getScene().getHeight();
+                    width = stage.getScene().getWidth();
+                }
+            }else {
+                innerFxml="overview.fxml";
+            }
+
+            MainController main = (MainController) replaceMainSceneContent(innerFxml, width, height);
             main.setApp(this);
-
-//            final FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource(innerFxml));
-//            fxmlLoader.setRoot(this);
-//            fxmlLoader.setController(this);
-
             stage.setTitle("家庭支出管理系统");
             Account.setPage(innerFxml);
         } catch (Exception ex) {
@@ -69,7 +91,7 @@ public class HEMS extends Application {
     }
 
     public void gotoMain() {
-        gotoMain("overview.fxml");
+        gotoMain("default");
     }
 
     public void gotoResigster() {
@@ -104,10 +126,10 @@ public class HEMS extends Application {
         return (Initializable) loader.getController();
     }
 
-    private Initializable replaceMainSceneContent(String fxml, int width, int height) throws Exception {
+    private Initializable replaceMainSceneContent(String fxml, double width, double height) throws Exception {
         FXMLLoader outerLoader = new FXMLLoader(getClass().getResource("main.fxml"));
 
-        Scene scene = new Scene(outerLoader.load(), width, height);
+        Scene scene = new Scene(outerLoader.load(),width,height);
 
         URL inner = getClass().getResource(fxml);
         // URL inner = getClass().getResource("inner2.fxml");
@@ -123,6 +145,7 @@ public class HEMS extends Application {
             stage.setScene(scene);
             stage.sizeToScene();
             stage.centerOnScreen();
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(this.getClass(), "页面加载异常！");

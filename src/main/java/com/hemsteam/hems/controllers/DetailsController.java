@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
+import javafx.util.converter.DoubleStringConverter;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -65,7 +66,7 @@ public class DetailsController implements Initializable {
     void onEnableEdit() {
         detailsTable.setEditable(true);
         timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
-        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));
+        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("moneyD"));
         positionColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("position"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("type"));
         tipColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("tip"));
@@ -129,15 +130,15 @@ public class DetailsController implements Initializable {
                 }
         );
 
-        moneyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        moneyColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         moneyColumn.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<Details, Double>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<Details, String> t) {
+                    public void handle(TableColumn.CellEditEvent<Details, Double> t) {
                         try {
                             ((Details) t.getTableView().getItems().get(
                                     t.getTablePosition().getRow())
-                            ).setMoney(t.getNewValue());
+                            ).setMoneyD(t.getNewValue());
                             saveData(((Details) t.getTableView().getItems().get(
                                     t.getTablePosition().getRow())
                             ));
@@ -264,5 +265,4 @@ public class DetailsController implements Initializable {
             tips.setText("文件保存失败");
         }
     }
-
 }
