@@ -48,7 +48,6 @@ public class OverviewController implements Initializable {
             tag=key+Percent.getPercent(
                     optimizeData.get(key),
                     sum);
-            Log.d(getClass(),tag);
             pieChartData.add(new PieChart.Data(tag,optimizeData.get(key)));
         }
             pieChart.setData(pieChartData);
