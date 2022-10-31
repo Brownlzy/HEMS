@@ -18,46 +18,32 @@ import java.util.*;
 
 public class StatsController implements Initializable {
     private static final String TAG = "StatsController";
-
     @FXML
-    private BarChart barchart;
-
+    private CategoryAxis xAxis = new CategoryAxis();//设置x轴
+    @FXML
+    private NumberAxis yAxis = new NumberAxis();//设置y轴
+    @FXML
+    private BarChart<String,Number> barchart =
+            new BarChart<>(xAxis, yAxis);//条状图
     @FXML
     private TableColumn typeColumn;
-
     @FXML
     private TableColumn percentColumn;
-
-
-
-
-
-
-
-
-
-
-
     @FXML
-    void onInquireClick(ActionEvent event) {
-
-
-    }
-
-
-    private CategoryAxis xAxis;
-
-    private ObservableList<String> typeNames = FXCollections.observableArrayList();
-
-
     public void initialize(URL location, ResourceBundle resources) {
-
-
-
+        xAxis.setLabel("种类");
+        yAxis.setLabel("金额");
+        HashMap<String,Double>originData;
+        originData=DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
+        XYChart.Series series = new XYChart.Series();
+        for (String key:
+                originData.keySet()) {
+            if(!key.equals("AllType"))
+                series.getData().add(new XYChart.Data(key, originData.get(key)));
+        }
+        barchart.getData().addAll(series);
 
     }
-
-
 }
 
 
