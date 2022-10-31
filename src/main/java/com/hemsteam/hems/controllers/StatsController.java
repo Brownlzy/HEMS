@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.TableColumn;
 
 
 import java.net.URL;
@@ -20,6 +21,12 @@ public class StatsController implements Initializable {
 
     @FXML
     private BarChart barchart;
+
+    @FXML
+    private TableColumn typeColumn;
+
+    @FXML
+    private TableColumn percentColumn;
 
 
 
