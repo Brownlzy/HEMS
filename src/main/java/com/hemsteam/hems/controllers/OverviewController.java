@@ -4,6 +4,7 @@ import com.hemsteam.hems.datamodels.Details;
 import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.handlers.DataBaseHelper;
 import com.hemsteam.hems.utils.Log;
+import com.hemsteam.hems.utils.Percent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,18 +28,28 @@ public class OverviewController implements Initializable {
     protected Label total;
 
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart;//饼状图
 
     private List<Details> list = new ArrayList<Details>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+            String tag;//显示类型以及百分比
+            double sum = 0;
             total.setText(String.valueOf(DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth()).get("AllType")));
             Log.d(this.getClass(), "数据读出");
             HashMap<String,Double>optimizeData=getOptimizeData();
+        for (String key:
+                optimizeData.keySet()) {
+            sum=sum+optimizeData.get(key);
+        }
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (String key:
                 optimizeData.keySet()) {
-            pieChartData.add(new PieChart.Data(key,optimizeData.get(key)));
+            tag=key+Percent.getPercent(
+                    optimizeData.get(key),
+                    sum);
+            Log.d(getClass(),tag);
+            pieChartData.add(new PieChart.Data(tag,optimizeData.get(key)));
         }
             pieChart.setData(pieChartData);
     }
@@ -58,10 +69,11 @@ public class OverviewController implements Initializable {
                 other=other-originData.get(key);
             }
         }
-        if(optimizeData.containsKey("其他"))
-            optimizeData.put("其他",optimizeData.get("其他")+other);
+        if(optimizeData.containsKey("其它")) {
+            optimizeData.put("其它", optimizeData.get("其它") + other);
+        }
         else
-            optimizeData.put("其他",other);
+            optimizeData.put("其它",other);
         return optimizeData;
     }
 }
