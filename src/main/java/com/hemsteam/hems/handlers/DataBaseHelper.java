@@ -24,34 +24,35 @@ public class DataBaseHelper {
     private static DataBaseHelper dataBaseHelper;
     Date date = new Date();
     Calendar calendar = Calendar.getInstance();
-    private DataBaseHelper(){
+
+    private DataBaseHelper() {
         //TODO: init
         //创建数据库
         CreateDB();
         //创建ID表
         try {
             CreateTable_ID();
-            Log.i(this.getClass(),"Build Success");
+            Log.i(this.getClass(), "Build Success");
         } catch (SQLException e) {
-            Log.e(this.getClass(),"CREATE ID ERROR");
+            Log.e(this.getClass(), "CREATE ID ERROR");
             throw new RuntimeException();
         }
 
         //创建Data表
         try {
             CreateTable_Data();
-            Log.i(this.getClass(),"Build Success");
+            Log.i(this.getClass(), "Build Success");
         } catch (SQLException e) {
-            Log.e(this.getClass(),"CREATE Data ERROR");
+            Log.e(this.getClass(), "CREATE Data ERROR");
             throw new RuntimeException();
         }
 
         //创建SUMMARY表
         try {
             CreateTable_SUMMARY();
-            Log.i(this.getClass(),"Build Success");
+            Log.i(this.getClass(), "Build Success");
         } catch (SQLException e) {
-            Log.e(this.getClass(),"CREATE Data ERROR");
+            Log.e(this.getClass(), "CREATE Data ERROR");
             throw new RuntimeException();
         }
 
@@ -81,9 +82,9 @@ public class DataBaseHelper {
 //        }
 
         try {
-            Log.d(this.getClass(),userName);
-            Log.d(this.getClass(),ID_Query("ID='"+userName+"'"));
-            return ID_Query("ID='"+userName+"'");
+            Log.d(this.getClass(), userName);
+            Log.d(this.getClass(), ID_Query("ID='" + userName + "'"));
+            return ID_Query("ID='" + userName + "'");
         } catch (SQLException e) {
             return null;
         }
@@ -97,8 +98,8 @@ public class DataBaseHelper {
 //            return true;
 //        }
         try {
-            ID_Insert(username,passwordHash);
-            SUMMARY_Insert(username,calendar.get(Calendar.MONTH)+1,"AllType","0");
+            ID_Insert(username, passwordHash);
+            SUMMARY_Insert(username, calendar.get(Calendar.MONTH) + 1, "AllType", "0");
             return true;
         } catch (SQLException e) {
             return false;
@@ -120,7 +121,7 @@ public class DataBaseHelper {
     }
 
     /**
-     *功能：创建ID表
+     * 功能：创建ID表
      */
     public void CreateTable_ID() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS ID"
@@ -130,7 +131,7 @@ public class DataBaseHelper {
     }
 
     /**
-     *功能：创建Data表
+     * 功能：创建Data表
      */
     public void CreateTable_Data() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS Data"
@@ -147,7 +148,7 @@ public class DataBaseHelper {
     }
 
     /**
-     *功能：创建SUMMARY表
+     * 功能：创建SUMMARY表
      */
     public void CreateTable_SUMMARY() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS SUMMARY"
@@ -159,25 +160,27 @@ public class DataBaseHelper {
     }
 
 
-
     /**
      * 功能：ID表的插入
+     *
      * @param id
      * @param pswd
      * @throws SQLException
      */
-    public static void ID_Insert(String id,String pswd) throws SQLException {
+    public static void ID_Insert(String id, String pswd) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO ID VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,id);
-            pstmt.setString(2,pswd);;
+            pstmt.setString(1, id);
+            pstmt.setString(2, pswd);
+            ;
             pstmt.executeUpdate();
         }
     }
 
     /**
      * 功能：Data表的插入
+     *
      * @param id
      * @param type
      * @param year
@@ -187,38 +190,39 @@ public class DataBaseHelper {
      * @param money
      * @throws SQLException
      */
-    public static void Data_Insert(String id,String type,int year,int month,int day,String position,String money,String tip,String in_time) throws SQLException {
+    public static void Data_Insert(String id, String type, int year, int month, int day, String position, String money, String tip, String in_time) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO Data VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,id);
-            pstmt.setString(2,type);
-            pstmt.setInt(3,year);
-            pstmt.setInt(4,month);
-            pstmt.setInt(5,day);
-            pstmt.setString(6,position);
-            pstmt.setString(7,money);
-            pstmt.setString(8,tip);
-            pstmt.setString(9,in_time);
+            pstmt.setString(1, id);
+            pstmt.setString(2, type);
+            pstmt.setInt(3, year);
+            pstmt.setInt(4, month);
+            pstmt.setInt(5, day);
+            pstmt.setString(6, position);
+            pstmt.setString(7, money);
+            pstmt.setString(8, tip);
+            pstmt.setString(9, in_time);
             pstmt.executeUpdate();
         }
     }
 
     /**
      * 功能：SUMMARY表的插入
+     *
      * @param id
      * @param month
      * @param sum
      * @throws SQLException
      */
-    public static void SUMMARY_Insert(String id,int month,String type,String sum) throws SQLException {
+    public static void SUMMARY_Insert(String id, int month, String type, String sum) throws SQLException {
         if (conn != null) {
             String sql = "INSERT INTO SUMMARY VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,id);
-            pstmt.setInt(2,month);
-            pstmt.setString(3,type);
-            pstmt.setString(4,sum);
+            pstmt.setString(1, id);
+            pstmt.setInt(2, month);
+            pstmt.setString(3, type);
+            pstmt.setString(4, sum);
             pstmt.executeUpdate();
         }
     }
@@ -226,6 +230,7 @@ public class DataBaseHelper {
 
     /**
      * 功能：删除满足condition条件的ID表里的值
+     *
      * @param condition
      * @throws SQLException
      */
@@ -239,6 +244,7 @@ public class DataBaseHelper {
 
     /**
      * 功能：删除满足condition条件的Data表里的值
+     *
      * @param condition
      * @throws SQLException
      */
@@ -252,6 +258,7 @@ public class DataBaseHelper {
 
     /**
      * 功能：删除满足condition条件的SUMMARY表里的值
+     *
      * @param condition
      * @throws SQLException
      */
@@ -266,11 +273,12 @@ public class DataBaseHelper {
 
     /**
      * 功能：ID内容更新,使满足condition的数据，修改value值
+     *
      * @param condition
      * @param value
      * @throws SQLException
      */
-    public static void ID_Update(String condition,String value) throws SQLException {
+    public static void ID_Update(String condition, String value) throws SQLException {
         if (conn != null) {
             String sql = "UPDATE ID SET " + value + " WHERE " + condition;
             Statement stmt = conn.createStatement();
@@ -280,11 +288,12 @@ public class DataBaseHelper {
 
     /**
      * 功能：Data内容更新,使满足condition的数据，修改value值
+     *
      * @param condition
      * @param value
      * @throws SQLException
      */
-    public static void Data_Update(String condition,String value) throws SQLException {
+    public static void Data_Update(String condition, String value) throws SQLException {
         if (conn != null) {
             String sql = "UPDATE Data SET " + value + " WHERE " + condition;
             Statement stmt = conn.createStatement();
@@ -294,11 +303,12 @@ public class DataBaseHelper {
 
     /**
      * 功能：SUMMARY内容更新,使满足condition的数据，修改value值
+     *
      * @param condition
      * @param value
      * @throws SQLException
      */
-    public static void SUMMARY_Update(String condition,String value) throws SQLException {
+    public static void SUMMARY_Update(String condition, String value) throws SQLException {
         if (conn != null) {
             String sql = "UPDATE SUMMARY SET " + value + " WHERE " + condition;
             Statement stmt = conn.createStatement();
@@ -308,6 +318,7 @@ public class DataBaseHelper {
 
     /**
      * 查找满足conditon条件的ID表的内容
+     *
      * @param condition
      * @throws SQLException
      */
@@ -514,6 +525,33 @@ public class DataBaseHelper {
             Data_Delete("IN_TIME='" + d.inTime + "'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void repairSummary() {
+        List<Details> result = getDetails();
+        for (Details details : result) {
+            try {
+                HashMap<String, Double> laterTypeMap = getTypeMoneyMap(details.getId(),
+                        details.date.getYear() + 1900,
+                        details.date.getMonth() + 1);
+                if (laterTypeMap.containsKey("AllType")) {
+                    SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
+                            details.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(laterTypeMap.get("AllType") + details.moneyD));
+                } else {
+                    SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), "AllType", details.money);
+                }
+                if (laterTypeMap.containsKey(details.type)) {
+                    SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
+                            details.date.getMonth() + 1) + " and TYPE='" + details.type + "'", "SUM=" + String.valueOf(laterTypeMap.get(details.type) + details.moneyD));
+                } else {
+                    SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), details.type, details.money);
+                }
+
+            } catch (Exception e) {
+
+            }
+
         }
     }
 }

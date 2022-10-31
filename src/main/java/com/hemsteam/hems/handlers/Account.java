@@ -73,6 +73,7 @@ public class Account {
         //登录成功
         user = un;
         setYearMonth(new Date().getYear() + 1900, new Date().getMonth() + 1);
+        //DataBaseHelper.getInstance().repairSummary();
         return LOGIN_SUCCESSFUL;
     }
 
