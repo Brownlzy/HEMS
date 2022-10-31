@@ -3,19 +3,18 @@ package com.hemsteam.hems.handlers;
 import com.hemsteam.hems.utils.Log;
 import com.hemsteam.hems.utils.SHA256;
 
-import java.util.Date;
-
 public class Account {
     public static final int RESIGSTER_SUCCESSFUL = 0;
     public static final int RESIGSTER_PASSWORD_UNANIMOUS = 1;
     public static final int RESIGSTER_USERNAME_EXISTS = 2;
     public static final int RESIGSTER_USERNAME_INVALID = 3;
     public static final int RESIGSTER_PASSWORD_INVALID = 4;
-    public static final int LOGIN_SUCCESSFUL = 0;
-    public static final int LOGIN_USERNAME_INVALID = 1;
-    public static final int LOGIN_PASSWORD_INVALID = 2;
-    public static final int LOGIN_USERNAME_NOT_EXISTS = 3;
-    public static final int LOGIN_PASSWORD_ERROR = 4;
+    public static final int RESIGSTER_DATABASE_FAILED = 5;
+    public static final int LOGIN_SUCCESSFUL = 6;
+    public static final int LOGIN_USERNAME_INVALID = 7;
+    public static final int LOGIN_PASSWORD_INVALID = 8;
+    public static final int LOGIN_USERNAME_NOT_EXISTS = 9;
+    public static final int LOGIN_PASSWORD_ERROR = 10;
     private static String user;
     private static int year;
     private static int month;
@@ -72,8 +71,6 @@ public class Account {
         if (!pwHash.equals(SHA256.getSHA256StrJava("HEMS" + pw))) return LOGIN_PASSWORD_ERROR;
         //登录成功
         user = un;
-        setYearMonth(new Date().getYear() + 1900, new Date().getMonth() + 1);
-        //DataBaseHelper.getInstance().repairSummary();
         return LOGIN_SUCCESSFUL;
     }
 
@@ -90,15 +87,15 @@ public class Account {
         return RESIGSTER_SUCCESSFUL;
     }
 
-    public boolean changPassword(String pw, String npw1, String npw2) {
+    public int changPassword(String pw, String npw1, String npw2) {
         if (login(getUser(), pw) == LOGIN_SUCCESSFUL) {
-            if (!isPasswordValid(pw)) return false;
-            if (!npw1.equals(npw2)) return false;
+            if (!isPasswordValid(pw)) return RESIGSTER_PASSWORD_INVALID;
+            if (!npw1.equals(npw2)) return RESIGSTER_PASSWORD_UNANIMOUS;
             if (!DataBaseHelper.getInstance().changePassword(getUser(), SHA256.getSHA256StrJava("HEMS" + npw1)))
-                return false;
-            return true;
+                return RESIGSTER_DATABASE_FAILED;
+            return RESIGSTER_SUCCESSFUL;
         } else
-            return false;
+            return LOGIN_PASSWORD_ERROR;
     }
 
     private boolean isUsernameValid(String name) {

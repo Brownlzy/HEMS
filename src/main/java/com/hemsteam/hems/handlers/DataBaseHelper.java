@@ -395,8 +395,13 @@ public class DataBaseHelper {
     }
 
     public boolean changePassword(String user, String passwordHash) {
-        //TODO
-        return true;
+        try {
+            ID_Update("ID='" + user + "'", "PASSWORD='" + passwordHash + "'");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public ObservableList<Details> getDetails() {
