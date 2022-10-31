@@ -74,7 +74,7 @@ public class HEMS extends Application {
 
     public void gotoResigster() {
         try {
-            ResigsterController resigster = (ResigsterController) replaceSceneContent("resigster.fxml", 300, 200);
+            ResigsterController resigster = (ResigsterController) replaceSceneContent("resigster.fxml", 680, 353);
             resigster.setApp(this);
             stage.setTitle("注册");
         } catch (Exception ex) {

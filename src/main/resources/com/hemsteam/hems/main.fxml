@@ -40,7 +40,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="user" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUserClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="个人信息" />
+                                        <Button fx:id="user" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUserClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="账户" />
                                         <Button fx:id="help" layoutX="18.0" layoutY="62.0" mnemonicParsing="false" onAction="#onHelpClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="帮助" />
                                         <Button fx:id="exit1" layoutX="18.0" layoutY="110.0" mnemonicParsing="false" onAction="#onExitClick" prefHeight="37.0" prefWidth="164.0" styleClass="sub-btn" text="退出系统" />
                               <VBox prefHeight="110.0" prefWidth="74.0" />
