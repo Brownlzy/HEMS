@@ -28,23 +28,24 @@
                 <GridPane>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="381.0" />
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="0.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="678.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="358.0" minWidth="0.0" prefWidth="165.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="95.0" minWidth="0.0" prefWidth="8.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <MenuButton id="sort" mnemonicParsing="false" text="排序方式">
+                        <MenuButton id="sort" mnemonicParsing="false" styleClass="button1" text="排序方式">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="时间" />
                                 <MenuItem mnemonicParsing="false" text="类型" />
                             </items>
                         </MenuButton>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="75.0" GridPane.columnIndex="2">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="90.0" GridPane.columnIndex="2">
                             <children>
-                                <Button id="add" mnemonicParsing="false" onAction="#onAddClick" text="增加" />
-                                <Button id="return" mnemonicParsing="false" onAction="#onDeleteClick" text="删除">
+                                <Button id="add" mnemonicParsing="false" onAction="#onAddClick" styleClass="button1" text="增加" />
+                                <Button id="return" mnemonicParsing="false" onAction="#onDeleteClick" styleClass="button1" text="删除">
                                     <HBox.margin>
                                         <Insets left="10.0"/>
                                     </HBox.margin>
@@ -54,7 +55,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
-                <TableView fx:id="detailsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="table-view" stylesheets="@../../../css/details.css" GridPane.rowIndex="1">
+                <TableView fx:id="detailsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="table-view" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="timeColumn" prefWidth="90.0" text="时间" />
                         <TableColumn fx:id="moneyColumn" prefWidth="75.0" text="金额" />
