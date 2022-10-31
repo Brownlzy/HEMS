@@ -208,7 +208,7 @@ public class DetailsController implements Initializable {
                         0,
                         "双击修改",
                         String.valueOf(new Date().getTime()));
-        data.add(details);
+        data.add(0, details);
         DataBaseHelper.getInstance().addDetails(details);
         onEnableEdit();
     }
