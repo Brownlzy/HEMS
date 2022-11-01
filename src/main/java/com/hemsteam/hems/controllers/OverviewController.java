@@ -22,8 +22,8 @@ import java.util.ResourceBundle;
 
 public class OverviewController implements Initializable {
     private static final String TAG = "OverviewController";
-
-
+    @FXML
+    public Label date;
     @FXML
     protected Label total;
 
@@ -36,7 +36,9 @@ public class OverviewController implements Initializable {
             String tag;//显示类型以及百分比
             double sum = 0;
             total.setText(String.valueOf(DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth()).get("AllType")));
+            date.setText(String.valueOf(Account.getYear())+"年"+String.valueOf(Account.getMonth())+"月");
             Log.d(this.getClass(), "数据读出");
+
             HashMap<String,Double>optimizeData=getOptimizeData();
         for (String key:
                 optimizeData.keySet()) {

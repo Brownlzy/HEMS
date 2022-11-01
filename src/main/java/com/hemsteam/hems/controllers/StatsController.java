@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,6 +25,8 @@ import java.util.*;
 
 public class StatsController implements Initializable {
     private static final String TAG = "StatsController";
+    @FXML
+    public Label date;
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();//设置x轴
     @FXML
@@ -54,7 +57,7 @@ public class StatsController implements Initializable {
         xAxis.setLabel("种类");
         yAxis.setLabel("金额");
 
-
+        date.setText(String.valueOf(Account.getYear())+"年"+String.valueOf(Account.getMonth())+"月");
         HashMap<String, Double> originData;
         originData = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
         XYChart.Series series = new XYChart.Series();
