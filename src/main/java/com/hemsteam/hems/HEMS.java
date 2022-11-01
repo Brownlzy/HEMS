@@ -37,6 +37,7 @@ public class HEMS extends Application {
         stage = primaryStage;
         stage.setTitle("");
         gotoLogin();
+        primaryStage.getIcons().add(new Image("/draw/cover.png"));
         //gotoMain();
         stage.show();
     }
