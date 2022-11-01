@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -35,6 +36,7 @@ public class HEMS extends Application {
         stage = primaryStage;
         stage.setTitle("");
         gotoLogin();
+        primaryStage.getIcons().add(new Image("/draw/cover.png"));
         //gotoMain();
         stage.show();
     }
