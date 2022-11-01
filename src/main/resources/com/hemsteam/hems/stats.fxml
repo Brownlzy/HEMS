@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="413.0" prefWidth="657.0" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.StatsController">
+<fx:root prefHeight="557.0" prefWidth="733.0" stylesheets="@../../../css/stats.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.StatsController">
    <top>
-      <AnchorPane prefHeight="61.0" prefWidth="598.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="top" prefHeight="61.0" prefWidth="598.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="32.0" layoutY="11.0" prefHeight="42.0" prefWidth="64.0" text="统计">
+            <Label alignment="CENTER" layoutX="32.0" layoutY="4.0" prefHeight="42.0" prefWidth="64.0" text="统计">
                <font>
                   <Font size="28.0" />
                </font>
@@ -21,7 +21,7 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="582.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="484.0" prefWidth="724.0" BorderPane.alignment="CENTER">
          <children>
             <BarChart fx:id="barchart" prefHeight="400.0" prefWidth="418.0" title="不同类型支出的柱状图">
               <xAxis>
@@ -31,7 +31,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <TableView fx:id="table" layoutX="418.0" prefHeight="378.0" prefWidth="240.0">
+            <TableView fx:id="table" layoutX="475.0" prefHeight="378.0" prefWidth="233.0" styleClass="../../../css/stats.css">
               <columns>
                 <TableColumn fx:id="typeColumn" text="类型" />
                 <TableColumn fx:id="moneyColumn" text="金额" />

@@ -4,9 +4,7 @@
   -fx-text-fill:black;
 
 }
-.split-pane:vertical > .split-pane-divider{
-    -fx-background-color: rgba(218, 243, 255);
-}
+
 .anchorpane{
     -fx-border-width: 0 0 6px 0;
     -fx-border-color: rgba(75, 155, 185, 0.11);
@@ -27,9 +25,7 @@
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
 }
-.button1:hover{
-    -fx-background-color:rgba(218, 243, 255);
-}
+
 
 #sort{
     -fx-background-color:white;
