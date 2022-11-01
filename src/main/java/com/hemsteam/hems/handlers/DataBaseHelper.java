@@ -100,7 +100,7 @@ public class DataBaseHelper {
 //        }
         try {
             ID_Insert(username, passwordHash);
-            SUMMARY_Insert(username, calendar.get(Calendar.MONTH) + 1, "AllType", "0");
+            SUMMARY_Insert(username,getYearMonth(new Date().getYear(),new Date().getMonth()), "AllType", "0");
             return true;
         } catch (SQLException e) {
             return false;
