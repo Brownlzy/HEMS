@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DetailsController implements Initializable {
+    @FXML
+    public Label date;
     private ObservableList<Details> data;
     @FXML
     private Button export;
@@ -32,6 +34,7 @@ public class DetailsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        date.setText(String.valueOf(Account.getYear())+"年"+String.valueOf(Account.getMonth())+"月");
         data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
 //        timeColumn.setCellValueFactory(new PropertyValueFactory<Details, String>("time"));
 //        moneyColumn.setCellValueFactory(new PropertyValueFactory<Details, Double>("money"));

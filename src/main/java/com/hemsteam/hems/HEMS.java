@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -28,6 +29,7 @@ import java.sql.SQLException;
 public class HEMS extends Application {
     private Stage stage;
     boolean max = false;
+
 
 
     @Override
