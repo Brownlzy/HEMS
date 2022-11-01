@@ -79,30 +79,35 @@ public class StatsController implements Initializable {
         barchart.getData().addAll(series);
 
 
-        ObservableList<Stats> data =
-                FXCollections.observableArrayList();
-        double sum=originData.get("AllType");
 
-
-        for (String key :
-                originData.keySet()) {
-            if (!key.equals("AllType"))
-                data.add(new Stats(key,originData.get(key) ,Percent.getPercent(
-                        originData.get(key),
-                        sum)));
+        if (!originData.containsKey("AllType")&&originData.size()==0) {
         }
+        else {
+            ObservableList<Stats> data =
+                    FXCollections.observableArrayList();
+            double sum = originData.get("AllType");
 
-        table.setEditable(true);
-        typeColumn.setCellValueFactory(
-                new PropertyValueFactory<>("type"));
-        moneyColumn.setCellValueFactory(
-                new PropertyValueFactory<>("money"));
-        percentColumn.setCellValueFactory(
-                new PropertyValueFactory<>("percent"));
 
-        table.getColumns().addAll(typeColumn,moneyColumn,percentColumn);
+            for (String key :
+                    originData.keySet()) {
+                if (!key.equals("AllType"))
+                    data.add(new Stats(key, originData.get(key), Percent.getPercent(
+                            originData.get(key),
+                            sum)));
+            }
 
-        table.setItems(data);
+            table.setEditable(true);
+            typeColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("type"));
+            moneyColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("money"));
+            percentColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("percent"));
+
+            table.getColumns().addAll(typeColumn, moneyColumn, percentColumn);
+
+            table.setItems(data);
+        }
 
 
 
