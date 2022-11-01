@@ -1,3 +1,9 @@
+.label
+{
+  -fx-font-family:KaiTi;
+  -fx-text-fill:black;
+
+}
 .sub-btn {
     -fx-pref-height: 35px;
     -fx-background-color: white;
