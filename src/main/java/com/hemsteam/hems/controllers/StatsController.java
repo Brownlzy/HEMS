@@ -21,6 +21,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StatsController implements Initializable {
     private static final String TAG = "StatsController";
@@ -56,12 +57,21 @@ public class StatsController implements Initializable {
 
 
         HashMap<String, Double> originData;
+        HashMap<String,Double>optimizeData;
         originData = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
+        optimizeData=originData.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
         XYChart.Series series = new XYChart.Series();
+        series.setName("金额");
         for (String key :
-                originData.keySet()) {
+                optimizeData.keySet()) {
             if (!key.equals("AllType"))
-                series.getData().add(new XYChart.Data(key, originData.get(key)));
+                series.getData().add(new XYChart.Data(key, optimizeData.get(key)));
         }
         barchart.getData().addAll(series);
 
