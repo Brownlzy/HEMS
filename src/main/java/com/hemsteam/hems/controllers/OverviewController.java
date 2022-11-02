@@ -31,6 +31,10 @@ public class OverviewController implements Initializable {
     private PieChart pieChart;//饼状图
 
     private List<Details> list = new ArrayList<Details>();
+    /**
+     * 初始化总览界面的饼状图
+     * @return void
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             String tag;//显示类型以及百分比

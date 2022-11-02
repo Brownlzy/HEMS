@@ -27,11 +27,14 @@ import java.sql.SQLException;
 
 
 public class HEMS extends Application {
-    private Stage stage;
-    boolean max = false;
+    private Stage stage;//窗口
+    boolean max = false;//检测窗口是否最大化
 
-
-
+    /**
+     * 初始化并创建窗口
+     * @param primaryStage 窗口
+     * @return void
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
@@ -44,6 +47,7 @@ public class HEMS extends Application {
 
     /**
      * 跳转到登录界面
+     * @return void
      */
     public void gotoLogin() {
         try {
@@ -59,7 +63,9 @@ public class HEMS extends Application {
 
 
     /**
-     * 跳转到主界面
+     * 跳转到主页面的内置场景
+     * @param innerFxml 要跳转的内置场景
+     * @return void
      */
     public void gotoMain(String innerFxml) {
         try {
@@ -93,10 +99,19 @@ public class HEMS extends Application {
         }
     }
 
+
+    /**
+     * 跳转到主界面
+     * @return void
+     */
     public void gotoMain() {
         gotoMain("default");
     }
 
+    /**
+     * 跳转到注册界面
+     * @return void
+     */
     public void gotoResigster() {
         try {
             ResigsterController resigster = (ResigsterController) replaceSceneContent("resigster.fxml", 680, 353);
@@ -108,6 +123,13 @@ public class HEMS extends Application {
         }
     }
 
+    /**
+     * 替换场景内容
+     * @param fxml 要替换的场景
+     * @param width 场景的宽
+     * @param height 场景的高
+     * @return
+     */
     private Initializable replaceSceneContent(String fxml, int width, int height) throws Exception {
 
         FXMLLoader loader = new FXMLLoader();

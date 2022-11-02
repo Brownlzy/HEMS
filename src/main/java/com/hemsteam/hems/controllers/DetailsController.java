@@ -62,8 +62,9 @@ public class DetailsController implements Initializable {
     public TableColumn tipColumn;
     @FXML
     public TableColumn delete;
+
     @FXML
-    private Label tips;
+    private Label tips;//保存文件成功之后的提示
 
     @FXML
     void onEnableEdit() {
@@ -233,6 +234,10 @@ public class DetailsController implements Initializable {
         DataBaseHelper.getInstance().putDetails(details);
     }
 
+    /**
+     * 点击导出后以csv格式保存表单的数据
+     * @return void
+     */
     @FXML
     void onExportClick() {
         try {

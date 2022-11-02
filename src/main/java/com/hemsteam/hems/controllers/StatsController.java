@@ -52,7 +52,10 @@ public class StatsController implements Initializable {
 
 
 
-
+    /**
+     * 初始化条状图和百分比表单
+     * @return void
+     */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         xAxis.setLabel("种类");
@@ -62,6 +65,7 @@ public class StatsController implements Initializable {
         HashMap<String, Double> originData;
         HashMap<String,Double>optimizeData;
         originData = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
+        //给获得到hashmap按value的值排序
         optimizeData=originData.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
