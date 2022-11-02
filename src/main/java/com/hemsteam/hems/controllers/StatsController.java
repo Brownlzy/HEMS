@@ -89,14 +89,14 @@ public class StatsController implements Initializable {
         else {
             ObservableList<Stats> data =
                     FXCollections.observableArrayList();
-            double sum = originData.get("AllType");
+            double sum = optimizeData.get("AllType");
 
 
             for (String key :
-                    originData.keySet()) {
+                    optimizeData.keySet()) {
                 if (!key.equals("AllType"))
-                    data.add(new Stats(key, originData.get(key), Percent.getPercent(
-                            originData.get(key),
+                    data.add(new Stats(key, optimizeData.get(key), Percent.getPercent(
+                            optimizeData.get(key),
                             sum)));
             }
 
