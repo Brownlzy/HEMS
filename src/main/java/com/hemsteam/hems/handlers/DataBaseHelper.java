@@ -1,7 +1,6 @@
 package com.hemsteam.hems.handlers;
 
 import com.hemsteam.hems.datamodels.Details;
-import com.hemsteam.hems.datamodels.Stats;
 import com.hemsteam.hems.utils.Log;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -329,8 +328,6 @@ public class DataBaseHelper {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-//                System.out.print("id：" + rs.getString(1) + " ");
-//                System.out.print("password：" + rs.getString(2) + " ");
                 return rs.getString(2);
             }
         }
@@ -362,14 +359,6 @@ public class DataBaseHelper {
                                 rs.getString(9)
                         )
                 );
-//                System.out.print("id：" + rs.getString(1) + " ");
-//                System.out.print("type：" + rs.getString(2) + " ");
-//                System.out.print("year：" + rs.getInt(3) + " ");
-//                System.out.print("month：" + rs.getInt(4) + " ");
-//                System.out.print("day：" + rs.getInt(5) + " ");
-//                System.out.print("position：" + rs.getString(6) + " ");
-//                System.out.println("money：" + rs.getString(7) + " ");
-//                System.out.println("tip:" + rs.getString(8));
             }
         }
     }
@@ -398,7 +387,14 @@ public class DataBaseHelper {
     }
 
 
-
+/**
+ * 在数据库中修改用户密码hash
+ *
+ * @param user         用户名
+ * @param passwordHash SHA256加密后的用户密码哈希
+ * @return boolean 修改密码是否成功
+ * @author Brownlzy
+ */
     public boolean changePassword(String user, String passwordHash) {
         try {
             ID_Update("ID='" + user + "'", "PASSWORD='" + passwordHash + "'");
@@ -409,6 +405,11 @@ public class DataBaseHelper {
         }
     }
 
+    /**
+     * 从数据库中读取所有消费明细
+     * @author Brownlzy
+     * @return javafx.collections.ObservableList<com.hemsteam.hems.datamodels.Details>
+ */
     public ObservableList<Details> getDetails() {
         ObservableList<Details> result = FXCollections.observableArrayList();
         try {
@@ -419,6 +420,12 @@ public class DataBaseHelper {
         return result;
     }
 
+    /**
+     * 根据消费类型读取所有指定类型的消费明细
+     * @author Brownlzy
+     * @param type 指定的消费类型
+     * @return javafx.collections.ObservableList<com.hemsteam.hems.datamodels.Details>
+ */
     public ObservableList<Details> getDetailsByType(String type) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
@@ -430,6 +437,13 @@ public class DataBaseHelper {
         return result;
     }
 
+    /**
+     * 根据消费年份读取所有指定类型的消费明细
+     *
+     * @param year 指定的消费年份
+     * @return javafx.collections.ObservableList<com.hemsteam.hems.datamodels.Details>
+     * @author Brownlzy
+     */
     public ObservableList<Details> getDetailsByYear(int year) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
@@ -441,6 +455,14 @@ public class DataBaseHelper {
         return result;
     }
 
+    /**
+     * 根据消费年月读取所有指定类型的消费明细
+     *
+     * @param year  指定的消费年份
+     * @param month 指定的消费月份
+     * @return javafx.collections.ObservableList<com.hemsteam.hems.datamodels.Details>
+     * @author Brownlzy
+     */
     public ObservableList<Details> getDetailsByMonth(int year, int month) {
         ObservableList<Details> result = FXCollections.observableArrayList();
         //TODO: 向result中add
@@ -452,61 +474,80 @@ public class DataBaseHelper {
         return result;
     }
 
-
-
-    public ObservableList<Details> getDetailsByDay(int year, int month, int day) {
-        ObservableList<Details> result = FXCollections.observableArrayList();
-        //TODO: 向result中add
-        try {
-            Data_Query("ID='" + Account.getUser() + "' and YEAR='" + year + "' and MONTH='" + month + "' and DAY='" + day + "'", result);
-        } catch (SQLException e) {
-            return FXCollections.observableArrayList();
-        }
-        return result;
-    }
-
-    public boolean putDetails(Details details) {
+    /**
+     * 修改指定的一笔消费明细
+     *
+     * @param details 修改后的消费明细
+     * @return boolean 修改是否成功
+     * @author Brownlzy
+     */
+    public boolean changeDetails(Details details) {
         List<Details> result = new ArrayList<>();
         try {
+            //根据时间戳在数据库中查询修改之前的明细
             Data_Query("IN_TIME='" + details.inTime + "'", result);
             Details detailsBefore = result.get(0);
+            //从数据库中获取修改前明细所在月份的所有summary记录
             HashMap<String, Double> formerTypeMap = getTypeMoneyMap(detailsBefore.getId(),
                     detailsBefore.date.getYear() + 1900,
                     detailsBefore.date.getMonth() + 1);
-            if (formerTypeMap.containsKey(detailsBefore.type))
-                SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
-                        detailsBefore.date.getMonth() + 1) + " and TYPE='" + detailsBefore.type + "'", "SUM=" + String.valueOf(formerTypeMap.get(detailsBefore.type) - detailsBefore.moneyD));
-            if (formerTypeMap.containsKey("AllType"))
-                SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
-                        detailsBefore.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(formerTypeMap.get("AllType") - detailsBefore.moneyD));
-
+            //从修改前类型总消费中减去修改前金额
+            if (formerTypeMap.containsKey(detailsBefore.type)) {
+                if (formerTypeMap.get(detailsBefore.type) - detailsBefore.moneyD <= 0) {    //减去之后总额为0,删除该条记录
+                    SUMMARY_Delete("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                            detailsBefore.date.getMonth() + 1) + " and TYPE='" + detailsBefore.type + "'");
+                } else { //减去总额不为0，更新记录
+                    SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                            detailsBefore.date.getMonth() + 1) + " and TYPE='" + detailsBefore.type + "'", "SUM=" + String.valueOf(formerTypeMap.get(detailsBefore.type) - detailsBefore.moneyD));
+                }
+            }
+            //从当月消费总金额中减去减去修改前金额
+            if (formerTypeMap.containsKey("AllType")) {
+                if (formerTypeMap.get("AllType") - detailsBefore.moneyD <= 0) {//减去之后总额为0,删除该条记录
+                    SUMMARY_Delete("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                            detailsBefore.date.getMonth() + 1) + " and TYPE='AllType'");
+                } else {//减去总额不为0，更新记录
+                    SUMMARY_Update("ID='" + detailsBefore.id + "' and MONTH=" + getYearMonth(detailsBefore.date.getYear() + 1900,
+                            detailsBefore.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(formerTypeMap.get("AllType") - detailsBefore.moneyD));
+                }
+            }
+            //更新修改后的明细
             Data_Update("IN_TIME='" + details.inTime + "'", "TYPE='" + details.type +
                     "', YEAR=" + (details.date.getYear() + 1900) + ", MONTH=" + (details.date.getMonth() + 1) +
                     ", DAY=" + details.date.getDate() + ", POSITION='" + details.position + "', MONEY='" + details.money +
                     "', TIP='" + details.tip + "'"
             );
+            //从数据库读取修改后所在月份的summary记录
             HashMap<String, Double> laterTypeMap = getTypeMoneyMap(details.getId(),
                     details.date.getYear() + 1900,
                     details.date.getMonth() + 1);
+            //插入或更新明细修改后的当月消费总金额
             if (laterTypeMap.containsKey("AllType")) {
                 SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
                         details.date.getMonth() + 1) + " and TYPE='AllType'", "SUM=" + String.valueOf(laterTypeMap.get("AllType") + details.moneyD));
             } else {
                 SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), "AllType", details.money);
             }
+            //插入或更新明细修改后的当月该类型消费总金额
             if (laterTypeMap.containsKey(details.type)) {
                 SUMMARY_Update("ID='" + details.id + "' and MONTH=" + getYearMonth(details.date.getYear() + 1900,
                         details.date.getMonth() + 1) + " and TYPE='" + details.type + "'", "SUM=" + String.valueOf(laterTypeMap.get(details.type) + details.moneyD));
             } else {
                 SUMMARY_Insert(details.id, getYearMonth(details.date.getYear() + 1900, details.date.getMonth() + 1), details.type, details.money);
             }
-            return true;
+            return true;    //返回修改成功
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
 
+    /**
+     * 增加一半空消费
+ * @author Brownlzy
+ * @param details 消费金额为0的消费记录
+ * @return boolean 是否增加成功
+ */
     public boolean addDetails(Details details) {
         try {
             Data_Insert(details.id, details.type, details.date.getYear() + 1900, details.date.getMonth() + 1, details.date.getDate(),
@@ -518,10 +559,26 @@ public class DataBaseHelper {
         }
     }
 
+    /**
+     * 根据所给年月返回数据库SUMMARY表中的月份格式
+     * @author Brownlzy
+ * @param year 指定的年份
+ * @param  month 指定的月份
+ * @return int yyyyMM
+ */
     public static int getYearMonth(int year, int month) {
         return year * 100 + month;
     }
 
+    /**
+     * 从数据库中查询指定年月的类型-消费金额数据
+     * @author Brownlzy
+     * @param id 消费金额关联的用户名
+     * @param year 指定的年份
+     * @param  month 指定的月份
+     * @return java.util.HashMap<java.lang.String,java.lang.Double>
+ * @version 1.0
+ */
     public HashMap<String, Double> getTypeMoneyMap(String id, int year, int month) {
         try {
             return SUMMARY_Query("ID='" + id + "' and MONTH=" + DataBaseHelper.getYearMonth(year, month));
@@ -529,12 +586,16 @@ public class DataBaseHelper {
             return null;
         }
     }
-
-    public void delDetails(Details d) {
-        try {
-            d.setMoney("0");
-            putDetails(d);
-            Data_Delete("IN_TIME='" + d.inTime + "'");
+/**
+ * 删除一条明细
+ * @author Brownlzy
+ * @param d 要删除的明细
+ */
+public void delDetails(Details d) {
+    try {
+        d.setMoney("0");
+        changeDetails(d);//复用修改明细对Summary表的更新
+            Data_Delete("IN_TIME='" + d.inTime + "'");//从DATA表中删除该明细
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
