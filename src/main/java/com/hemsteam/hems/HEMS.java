@@ -7,9 +7,6 @@ import com.hemsteam.hems.controllers.ResigsterController;
 import com.hemsteam.hems.handlers.Account;
 import com.hemsteam.hems.utils.Log;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -18,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,9 +59,10 @@ public class HEMS extends Application {
 
 
     /**
-     * 跳转到主页面的内置场景
+     * 跳转到主界面的内置场景
+     *
      * @param innerFxml 要跳转的内置场景
-     * @return void
+     * @author ShakingX Brownlzy
      */
     public void gotoMain(String innerFxml) {
         try {
