@@ -37,11 +37,13 @@ public class DetailsController implements Initializable {
     public TableColumn tipColumn;
     @FXML
     public TableColumn delete;
+
     private ObservableList<Details> data;
     @FXML
     private TableView<Details> detailsTable;
+
     @FXML
-    private Label tips;
+    private Label tips;//保存文件成功之后的提示
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -191,6 +193,10 @@ public class DetailsController implements Initializable {
         DataBaseHelper.getInstance().changeDetails(details);
     }
 
+    /**
+     * 点击导出后以csv格式保存表单的数据
+     * @return void
+     */
     @FXML
     void onExportClick() {
         try {

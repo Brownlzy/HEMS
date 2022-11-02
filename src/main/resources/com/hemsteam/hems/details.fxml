@@ -12,9 +12,13 @@
     <top>
         <AnchorPane prefHeight="61.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" layoutX="28.0" layoutY="14.0" prefHeight="8.0" prefWidth="116.0" text="明细">
+                <Label alignment="CENTER" layoutX="28.0" layoutY="14.0" text="明细" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="10">
                <font>
                   <Font size="32.0" />
+               </font></Label>
+                <Label fx:id="date" layoutX="525.0" layoutY="15.0" text="Label" textAlignment="CENTER" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="18.0">
+               <font>
+                  <Font size="24.0" />
                </font></Label>
             </children>
         </AnchorPane>

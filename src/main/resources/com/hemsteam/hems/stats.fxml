@@ -8,22 +8,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="557.0" prefWidth="733.0" stylesheets="@../../../css/stats.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.StatsController">
+<fx:root prefHeight="605.0" prefWidth="910.0" stylesheets="@../../../css/stats.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.StatsController">
    <top>
       <AnchorPane id="top" prefHeight="61.0" prefWidth="598.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="32.0" layoutY="4.0" prefHeight="42.0" prefWidth="64.0" text="统计">
+            <Label alignment="CENTER" layoutX="32.0" layoutY="4.0" text="统计" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="10">
                <font>
-                  <Font size="28.0" />
+                  <Font size="32.0" />
                </font>
             </Label>
+             <Label fx:id="date" layoutX="525.0" layoutY="15.0" text="Label" textAlignment="CENTER" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="18.0">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="484.0" prefWidth="724.0" BorderPane.alignment="CENTER">
          <children>
-            <BarChart fx:id="barchart" prefHeight="400.0" prefWidth="418.0" title="不同类型支出的柱状图">
+            <BarChart fx:id="barchart" layoutX="94.0" layoutY="57.0" prefHeight="400.0" prefWidth="418.0" title="不同类型支出的柱状图">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -31,7 +35,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <TableView fx:id="table" layoutX="475.0" prefHeight="378.0" prefWidth="233.0" styleClass="../../../css/stats.css">
+            <TableView fx:id="table" layoutX="602.0" layoutY="57.0" prefHeight="378.0" prefWidth="238.0" styleClass="../../../css/stats.css">
               <columns>
                 <TableColumn fx:id="typeColumn" text="类型" />
                 <TableColumn fx:id="moneyColumn" text="金额" />

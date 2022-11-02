@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +26,8 @@ import java.util.stream.Collectors;
 
 public class StatsController implements Initializable {
     private static final String TAG = "StatsController";
+    @FXML
+    public Label date;
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();//设置x轴
     @FXML
@@ -49,16 +52,20 @@ public class StatsController implements Initializable {
 
 
 
-
+    /**
+     * 初始化条状图和百分比表单
+     * @return void
+     */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         xAxis.setLabel("种类");
         yAxis.setLabel("金额");
 
-
+        date.setText(String.valueOf(Account.getYear())+"年"+String.valueOf(Account.getMonth())+"月");
         HashMap<String, Double> originData;
         HashMap<String,Double>optimizeData;
         originData = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth());
+        //给获得到hashmap按value的值排序
         optimizeData=originData.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
@@ -76,31 +83,35 @@ public class StatsController implements Initializable {
         barchart.getData().addAll(series);
 
 
-        ObservableList<Stats> data =
-                FXCollections.observableArrayList();
-        double sum=originData.get("AllType");
 
-
-        for (String key :
-                originData.keySet()) {
-            if (!key.equals("AllType"))
-                data.add(new Stats(key,originData.get(key) ,Percent.getPercent(
-                        originData.get(key),
-                        sum)));
+        if (!originData.containsKey("AllType")&&originData.size()==0) {
         }
+        else {
+            ObservableList<Stats> data =
+                    FXCollections.observableArrayList();
+            double sum = originData.get("AllType");
 
-        table.setEditable(true);
-        typeColumn.setCellValueFactory(
-                new PropertyValueFactory<>("type"));
-        moneyColumn.setCellValueFactory(
-                new PropertyValueFactory<>("money"));
-        percentColumn.setCellValueFactory(
-                new PropertyValueFactory<>("percent"));
 
-        table.getColumns().addAll(typeColumn,moneyColumn,percentColumn);
+            for (String key :
+                    originData.keySet()) {
+                if (!key.equals("AllType"))
+                    data.add(new Stats(key, originData.get(key), Percent.getPercent(
+                            originData.get(key),
+                            sum)));
+            }
 
-        table.setItems(data);
+            table.setEditable(true);
+            typeColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("type"));
+            moneyColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("money"));
+            percentColumn.setCellValueFactory(
+                    new PropertyValueFactory<>("percent"));
 
+            table.getColumns().addAll(typeColumn, moneyColumn, percentColumn);
+
+            table.setItems(data);
+        }
 
 
 
