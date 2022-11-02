@@ -15,4 +15,5 @@ module com.hemsteam.hems {
     exports com.hemsteam.hems;
     exports com.hemsteam.hems.controllers;
     opens com.hemsteam.hems.controllers to javafx.fxml;
+    opens com.hemsteam.hems.datamodels to javafx.base;
 }

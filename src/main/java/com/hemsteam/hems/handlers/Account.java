@@ -1,7 +1,7 @@
 package com.hemsteam.hems.handlers;
 
+import com.hemsteam.hems.utils.Log;
 import com.hemsteam.hems.utils.SHA256;
-import com.hemsteam.hems.handlers.DataBaseHelper;
 
 public class Account {
     public static final int RESIGSTER_SUCCESSFUL = 0;
@@ -9,17 +9,44 @@ public class Account {
     public static final int RESIGSTER_USERNAME_EXISTS = 2;
     public static final int RESIGSTER_USERNAME_INVALID = 3;
     public static final int RESIGSTER_PASSWORD_INVALID = 4;
-    public static final int LOGIN_SUCCESSFUL = 0;
-    public static final int LOGIN_USERNAME_INVALID = 1;
-    public static final int LOGIN_PASSWORD_INVALID = 2;
-    public static final int LOGIN_USERNAME_NOT_EXISTS = 3;
-    public static final int LOGIN_PASSWORD_ERROR = 4;
-    private String user;
+    public static final int RESIGSTER_DATABASE_FAILED = 5;
+    public static final int LOGIN_SUCCESSFUL = 6;
+    public static final int LOGIN_USERNAME_INVALID = 7;
+    public static final int LOGIN_PASSWORD_INVALID = 8;
+    public static final int LOGIN_USERNAME_NOT_EXISTS = 9;
+    public static final int LOGIN_PASSWORD_ERROR = 10;
+    private static String user;
+    private static int year;
+    private static int month;
+
+    public static String getPage() {
+        return page;
+    }
+
+    public static void setPage(String page) {
+        Account.page = page;
+    }
+
+    private static String page;
+
+    public static void setYearMonth(int y, int m) {
+        year = y;
+        month = m;
+        Log.i(Account.class, "year:" + y + " month:" + m);
+    }
+
+    public static int getYear() {
+        return year;
+    }
+
+    public static int getMonth() {
+        return month;
+    }
 
     private static Account account;
 
     private Account() {
-        user = "UnLogin";
+        user = "admin";
     }
 
     public static Account getInstance() {
@@ -28,7 +55,8 @@ public class Account {
         return account;
     }
 
-    public String getUser() {
+    public static String getUser() {
+        if (account == null) account = new Account();
         return user;
     }
 
@@ -57,6 +85,17 @@ public class Account {
             return RESIGSTER_USERNAME_EXISTS;
         //注册成功
         return RESIGSTER_SUCCESSFUL;
+    }
+
+    public int changPassword(String pw, String npw1, String npw2) {
+        if (login(getUser(), pw) == LOGIN_SUCCESSFUL) {
+            if (!isPasswordValid(pw)) return RESIGSTER_PASSWORD_INVALID;
+            if (!npw1.equals(npw2)) return RESIGSTER_PASSWORD_UNANIMOUS;
+            if (!DataBaseHelper.getInstance().changePassword(getUser(), SHA256.getSHA256StrJava("HEMS" + npw1)))
+                return RESIGSTER_DATABASE_FAILED;
+            return RESIGSTER_SUCCESSFUL;
+        } else
+            return LOGIN_PASSWORD_ERROR;
     }
 
     private boolean isUsernameValid(String name) {

@@ -1,0 +1,24 @@
+#top{
+    -fx-border-width: 0 0 6px 0;
+    -fx-border-color: rgba(75, 155, 185, 0.11);
+}
+.button{
+       -fx-background-color:white;
+       -fx-background-radius: 8px;
+       -fx-border-radius: 8px;
+
+}
+
+.button:hover{
+       -fx-background-color:rgba(218, 243, 255);
+
+}
+.label-left{
+
+
+}
+
+.PassWordField{
+
+
+}
