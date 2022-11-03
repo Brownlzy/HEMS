@@ -23,6 +23,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class DetailsController implements Initializable {
     @FXML
@@ -37,17 +38,62 @@ public class DetailsController implements Initializable {
     public TableColumn tipColumn;
     @FXML
     public TableColumn delete;
+    @FXML
+    public Label date;
 
     private ObservableList<Details> data;
+    private Set<String> type;
     @FXML
     private TableView<Details> detailsTable;
 
     @FXML
     private Label tips;//保存文件成功之后的提示
+    @FXML
+    private MenuButton sortWay;
 
+    @FXML
+    void onTypeChose(ActionEvent event) {
+
+    }
+/**
+ * 明细页初始化
+ *
+ * @param location
+ * @param resources
+ * @author Brownlzy
+ */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //读取当月所有类型
+        type = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth()).keySet();
+        //选中类型后显示对应类型消费记录
+        EventHandler<ActionEvent> sort = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                if (((MenuItem) e.getSource()).getText().equals("全部类型")) {
+                    data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
+                    sortWay.setText("全部类型");
+                } else {
+                    data = DataBaseHelper.getInstance().getDetailsByType(Account.getYear(), Account.getMonth(), ((MenuItem) e.getSource()).getText());
+                    sortWay.setText(((MenuItem) e.getSource()).getText());
+                }
+                onTableInit();
+            }
+        };
+        //向下拉表单中添加类型
+        for (String str : type) {
+            if (!str.equals("AllType")) {
+                MenuItem i = new MenuItem(str);
+                i.setOnAction(sort);
+                sortWay.getItems().add(i);
+            } else {
+                MenuItem i = new MenuItem("全部类型");
+                i.setOnAction(sort);
+                sortWay.getItems().add(0, i);
+            }
+        }
+        sortWay.setText("全部类型");
         data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
+        date.setText(String.valueOf(Account.getYear()) + "年" + String.valueOf(Account.getMonth()) + "月");
         onTableInit();
     }
 
