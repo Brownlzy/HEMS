@@ -213,7 +213,7 @@ public class DetailsController implements Initializable {
  */
     @FXML
     protected void onAddClick() {
-        Details details = new Details(Account.getUser(), new Date(), "其他", "双击修改", 0, "双击修改");
+        Details details = new Details(Account.getUser(), new Date(), "其它", "双击修改", 0, "双击修改");
         data.add(0, details);
         DataBaseHelper.getInstance().addDetails(details);
         onTableInit();

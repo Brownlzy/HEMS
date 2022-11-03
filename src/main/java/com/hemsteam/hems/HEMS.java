@@ -145,7 +145,7 @@ public class HEMS extends Application {
         } finally {
             in.close();
         }
-        return (Initializable) loader.getController();
+        return loader.getController();
     }
 
     private Initializable replaceMainSceneContent(String fxml, double width, double height) throws Exception {
