@@ -43,7 +43,7 @@ public class InformationController implements Initializable {
                 break;
             case Account.RESIGSTER_PASSWORD_INVALID:
                 newPasswd.clear();
-                newPasswd.setPromptText("新密码密码不和规范（最少4位）");
+                newPasswd.setPromptText("新密码不规范（最少4位）");
                 break;
             case Account.RESIGSTER_PASSWORD_UNANIMOUS:
                 rePasswd.clear();
