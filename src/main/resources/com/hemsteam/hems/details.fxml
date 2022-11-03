@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <fx:root prefHeight="483.0" prefWidth="987.0" stylesheets="@../../../css/details.css" type="javafx.scene.layout.BorderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemsteam.hems.controllers.DetailsController">
     <top>
         <AnchorPane prefHeight="61.0" prefWidth="200.0" styleClass="anchorpane" BorderPane.alignment="CENTER">
@@ -43,22 +39,21 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <MenuButton id="sort" mnemonicParsing="false" styleClass="button1" text="排序方式">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="时间" />
-                                <MenuItem mnemonicParsing="false" text="类型" />
-                            </items>
-                        </MenuButton>
+                        <MenuButton id="sort" fx:id="sortWay" mnemonicParsing="false" onAction="#onTypeChose"
+                                    styleClass="button1" text="排序方式"/>
                         <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="130.0" GridPane.columnIndex="2">
-                     <children>
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0" prefWidth="60.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="83.0" minWidth="10.0" prefWidth="60.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="60.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="10.0"
+                                                           prefWidth="60.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="83.0" minWidth="10.0"
+                                                           prefWidth="60.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0"
+                                                           prefWidth="60.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                           </rowConstraints>
                            <children>
                                       <Button id="export" fx:id="expor" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onExportClick" styleClass="button1" text="导出" GridPane.columnIndex="2">

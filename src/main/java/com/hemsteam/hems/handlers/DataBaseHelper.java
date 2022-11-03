@@ -422,15 +422,17 @@ public class DataBaseHelper {
 
     /**
      * 根据消费类型读取所有指定类型的消费明细
-     * @author Brownlzy
-     * @param type 指定的消费类型
+     *
+     * @param year  指定的消费年份
+     * @param month 指定的消费月份
+     * @param type  指定的消费类型
      * @return javafx.collections.ObservableList<com.hemsteam.hems.datamodels.Details>
- */
-    public ObservableList<Details> getDetailsByType(String type) {
+     * @author Brownlzy
+     */
+    public ObservableList<Details> getDetailsByType(int year, int month, String type) {
         ObservableList<Details> result = FXCollections.observableArrayList();
-        //TODO: 向result中add
         try {
-            Data_Query("ID='" + Account.getUser() + "' and TYPE='" + type + "'", result);
+            Data_Query("ID='" + Account.getUser() + "' and TYPE='" + type + "' and YEAR='" + year + "' and MONTH='" + month + "'", result);
         } catch (SQLException e) {
             return FXCollections.observableArrayList();
         }

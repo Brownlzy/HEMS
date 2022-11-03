@@ -23,6 +23,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class DetailsController implements Initializable {
     @FXML
@@ -37,17 +38,50 @@ public class DetailsController implements Initializable {
     public TableColumn tipColumn;
     @FXML
     public TableColumn delete;
+    @FXML
+    public Label date;
 
     private ObservableList<Details> data;
+    private Set<String> type;
     @FXML
     private TableView<Details> detailsTable;
 
     @FXML
     private Label tips;//保存文件成功之后的提示
+    @FXML
+    private MenuButton sortWay;
+
+    @FXML
+    void onTypeChose(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        type = DataBaseHelper.getInstance().getTypeMoneyMap(Account.getUser(), Account.getYear(), Account.getMonth()).keySet();
+        EventHandler<ActionEvent> sort = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                if (((MenuItem) e.getSource()).getText().equals("全部类型"))
+                    data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
+                else
+                    data = DataBaseHelper.getInstance().getDetailsByType(Account.getYear(), Account.getMonth(), ((MenuItem) e.getSource()).getText());
+                onTableInit();
+            }
+        };
+        MenuItem item = new MenuItem("全部类型");
+        item.setOnAction(sort);
+        sortWay.getItems().add(item);
+        if (type != null) {
+            for (String str : type) {
+                if (!str.equals("AllType")) {
+                    MenuItem i = new MenuItem(str);
+                    i.setOnAction(sort);
+                    sortWay.getItems().add(i);
+                }
+            }
+        }
         data = DataBaseHelper.getInstance().getDetailsByMonth(Account.getYear(), Account.getMonth());
+        date.setText(String.valueOf(Account.getYear()) + "年" + String.valueOf(Account.getMonth()) + "月");
         onTableInit();
     }
 
