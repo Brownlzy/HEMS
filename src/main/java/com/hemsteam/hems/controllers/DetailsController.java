@@ -118,8 +118,11 @@ public class DetailsController implements Initializable {
         timeColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Details, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Details, String> t) {
-                ((Details) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTime(t.getNewValue());
-                saveData(((Details) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+                if (((Details) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTime(t.getNewValue()))
+                    saveData(((Details) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+                else {
+                    onTableInit();
+                }
             }
         });
         typeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
