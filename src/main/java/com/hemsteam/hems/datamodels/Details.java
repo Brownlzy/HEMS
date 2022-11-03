@@ -101,15 +101,21 @@ public class Details {
         return time;
     }
 
-    public void setTime(String time) {
+    public boolean setTime(String time) {
         try {
+            int year = Integer.parseInt(time.split("-")[0]) - 1900;
+            int month = Integer.parseInt(time.split("-")[1]) - 1;
+            int day = Integer.parseInt(time.split("-")[2]);
+            if (month < 0 || month > 11) return false;
+            if (day < 1 || day > new Date(year, month + 1, 0).getDate()) return false;
             date = new Date(Integer.parseInt(time.split("-")[0]) - 1900,
                     Integer.parseInt(time.split("-")[1]) - 1,
                     Integer.parseInt(time.split("-")[2])
             );
             this.time = String.format("%tF%n", this.date);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
     }
 
@@ -135,6 +141,7 @@ public class Details {
 
     public void setMoneyD(double money) {
         this.moneyD = money;
+        this.money = String.valueOf(money);
     }
 
     public String getTip() {
